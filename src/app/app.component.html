@@ -1,7 +1,10 @@
 <nav>
-  <ul>
-    <li>Dashboard</li>
-    <li>Books</li>
-    <li>Users</li>
-  </ul>
+	<a routerLink='/'>Dashboard</a> |
+	<a routerLink='/book'>Books</a> |
+	<a routerLink='/user/'>Users</a> |
+	<a routerLink='/lent/'>Lent</a> |
+	<a routerLink='/dummy'>Dummy</a>
 </nav>
+<main>
+  <router-outlet></router-outlet>
+</main>

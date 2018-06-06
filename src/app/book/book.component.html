@@ -1,0 +1,27 @@
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Author</th>
+				<th>Tags</th>
+				<th>Copies</th>
+			</tr>
+		</thead>
+		<tbody *ngIf="result!=null">
+			<tr *ngFor="let book of bookList">
+				<td><a routerLink="/book/{{book.id}}">{{book.title}}</a></td>
+				<td>{{book.author}}</td>
+				<td style="max-width: 20em">
+					<small *ngFor="let tag of book.booktag_set" style="padding: 5px">{{tag.tag}}</small>,
+				</td>
+				<td>{{book.copies}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div *ngIf="result!=null">
+		<button *ngIf="result.next!=null" (click)="getNextBooks()">Load More</button>
+		<button *ngIf="result.next!=null" (click)="loadAllBooks()">Load All</button>
+	</div>
+</div>

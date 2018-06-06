@@ -1,0 +1,9 @@
+<div *ngIf="book!=null">
+	<strong>Title</strong>	: <strong>{{book.title}}</strong><br>
+	<strong>Author</strong>	: <strong>{{book.author}}</strong><br>
+	<strong>Tags</strong> :
+	<div>
+		<small *ngFor="let tag of book.booktag_set" style="padding: 5px">{{tag.tag}}</small>,
+	</div><br>
+	<strong>Copies</strong>	: <strong>{{book.copies}}</strong><br>
+</div>
