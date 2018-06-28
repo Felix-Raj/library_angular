@@ -10,6 +10,7 @@ import { BookComponent } from './book/book.component';
 import { BookDetailComponent } from './book-detail/book-detail.component';
 import { UserComponent } from './user/user.component';
 import { LentComponent } from './lent/lent.component';
+import { LentCreateComponent } from './lent-create/lent-create.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { LentComponent } from './lent/lent.component';
     BookComponent,
     BookDetailComponent,
     UserComponent,
-    LentComponent
+    LentComponent,
+    LentCreateComponent
   ],
   imports: [
     BrowserModule,
