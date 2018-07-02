@@ -11,7 +11,7 @@
 			</tr>
 		</thead>
 		<tbody *ngIf="result!=null">
-			<tr *ngFor="let lent of lentList">
+			<tr *ngFor="let lent of list">
 				<td>{{lent.lib_user.name}}</td>
 				<td>{{lent.lib_user.uid}}</td>
 				<td>{{lent.book.title}}</td>
@@ -22,6 +22,6 @@
 	</table>
 </div>
 <p *ngIf="result!=null">
-  <button *ngIf="result.next!=null" (click)="getLentList()">Load More</button>
-  <button *ngIf="result.next!=null" (click)="loadAllLentList()">Load All</button>
+  <button *ngIf="result.next!=null" (click)="getNextList()">Load More</button>
+  <button *ngIf="result.next!=null" (click)="loadAllList()">Load All</button>
 </p>

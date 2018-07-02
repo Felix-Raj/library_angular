@@ -9,7 +9,7 @@
 			</tr>
 		</thead>
 		<tbody *ngIf="result!=null">
-			<tr *ngFor="let book of bookList">
+			<tr *ngFor="let book of list">
 				<td><a routerLink="/book/{{book.id}}">{{book.title}}</a></td>
 				<td>{{book.author}}</td>
 				<td style="max-width: 20em">

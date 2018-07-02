@@ -11,7 +11,7 @@ import { Book, Result } from '../class/classes';
 })
 export class BookDetailComponent implements OnInit {
 
-	private book: Book;
+	book: Book;
 
   constructor(private bookService: BookService, private route: ActivatedRoute) { }
 
