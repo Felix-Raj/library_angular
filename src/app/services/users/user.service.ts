@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http'
 
-import { Observable } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { Result, User } from '../../class/classes';
 import { baseUrl } from '../book.service';
@@ -25,7 +26,22 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUsers(url = urls.userList): Observable<Result<User>>{
-  	console.log(url);
   	return this.http.get<Result<User>>(url);
+  }
+
+  createUser(user: User): Observable<User>{
+  	console.log('creating user');
+  	return this.http.post<User>(urls.newUser, user, httpOptions);
+  }
+
+  handleError<T>(err: HttpErrorResponse){
+  	console.log(err.error.message);
+  	if (err.error instanceof ErrorEvent) {
+  		console.error('An error ocured ', err.error.message);
+  	}else {
+  		console.log(`Backed retured code ${err.status} body was : ${err.error}`);
+  	}
+
+  	return throwError('Error!');
   }
 }
