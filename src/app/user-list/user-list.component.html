@@ -1,0 +1,21 @@
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th>UID</th>
+				<th>Name</th>
+			</tr>
+		</thead>
+		<tbody *ngIf="result!=null">
+			<tr *ngFor="let user of list">
+				<td>{{user.uid}}</td>
+				<td>{{user.name}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div *ngIf="result!=null">
+		<button *ngIf="result.next!=null" (click)="getNextList()">Load More</button>
+		<button *ngIf="result.next!=null" (click)="loadAllList()">Load All</button>
+	</div>
+</div>

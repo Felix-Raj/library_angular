@@ -10,10 +10,9 @@ import { DummyComponent } from './dummy/dummy.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BookComponent } from './book/book.component';
 import { BookDetailComponent } from './book-detail/book-detail.component';
-import { UserComponent } from './user/user.component';
+import { UserModule } from './user/user.module';
 import { LentComponent } from './lent/lent.component';
 import { LentCreateComponent } from './lent-create/lent-create.component';
-import { UserCreateFormComponent } from './user-create-form/user-create-form.component';
 
 @NgModule({
   declarations: [
@@ -22,16 +21,15 @@ import { UserCreateFormComponent } from './user-create-form/user-create-form.com
     DashboardComponent,
     BookComponent,
     BookDetailComponent,
-    UserComponent,
     LentComponent,
     LentCreateComponent,
-    UserCreateFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    UserModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
