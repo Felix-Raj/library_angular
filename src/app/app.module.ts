@@ -8,9 +8,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { DummyComponent } from './dummy/dummy.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { BookComponent } from './book/book.component';
-import { BookDetailComponent } from './book-detail/book-detail.component';
 import { UserModule } from './user/user.module';
+import { BookModule } from './book/book.module';
 import { LentComponent } from './lent/lent.component';
 import { LentCreateComponent } from './lent-create/lent-create.component';
 
@@ -19,8 +18,6 @@ import { LentCreateComponent } from './lent-create/lent-create.component';
     AppComponent,
     DummyComponent,
     DashboardComponent,
-    BookComponent,
-    BookDetailComponent,
     LentComponent,
     LentCreateComponent,
   ],
@@ -30,6 +27,7 @@ import { LentCreateComponent } from './lent-create/lent-create.component';
     HttpClientModule,
     ReactiveFormsModule,
     UserModule,
+    BookModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

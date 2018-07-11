@@ -5,7 +5,6 @@ import { Result, User } from '../class/classes'
 import { ResultList } from '../shared/list_class';
 
 @Component({
-  selector: 'app-user',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })

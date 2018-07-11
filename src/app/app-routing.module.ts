@@ -13,11 +13,6 @@ import { LentComponent } from './lent/lent.component';
 
 const routes: Routes=[
 	{ path: '', component: DashboardComponent },
-  { path: 'book', component: BookComponent },
-	{ path: 'book/:id', component: BookDetailComponent },
-  // { path: 'user', component: UserComponent},
-  // { path: 'user/list', component: UserListComponent},
-  // { path: 'user/new', component: UserCreateFormComponent},
   { path: 'lent', component: LentComponent},
 	{ path:'dummy', component: DummyComponent }
 ]

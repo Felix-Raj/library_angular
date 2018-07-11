@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 import { BookService } from '../services/book.service';
 import { Book, Result } from '../class/classes';
@@ -20,13 +21,17 @@ export class BookDetailComponent implements OnInit {
   }
 
   getBook(): void {
-  	const id = this.route.snapshot.paramMap.get('id');
-  	console.log(id);
-  	this.bookService.getBookDetails(id).subscribe(
-  		result=>{
-  			this.book = result
-  		}
-  	)
+    // rather than using snapshot use
+    // https://angular.io/guide/router#activated-route-in-action
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
+        this.bookService.getBookDetails(params.get('id'))
+      )
+    ).subscribe(
+      result=>{
+        this.book = result
+      }
+    );
   }
 
 }
