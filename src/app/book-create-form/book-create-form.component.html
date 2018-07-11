@@ -1,0 +1,6 @@
+<form [formGroup]="bookCreateForm" (ngSubmit)="onSubmit()">
+	<label>Title <input formControlName="title"></label>
+	<label>Author <input formControlName="author"></label>
+	<label>Copies <input formControlName="copies"></label>
+	<button type="submit" [disabled]="bookCreateForm.pristine">Save</button>
+</form>

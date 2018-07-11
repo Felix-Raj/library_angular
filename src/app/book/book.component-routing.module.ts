@@ -3,12 +3,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { BookComponent } from './book.component';
 import { BookDetailComponent } from '../book-detail/book-detail.component';
 import { BookListComponent } from '../book-list/book-list.component';
+import { BookCreateFormComponent } from '../book-create-form/book-create-form.component';
 
 const bookRoutes: Routes = [
 	{
 		path: 'book',
 		component: BookComponent,
 		children: [
+			{
+				path: 'new',
+				component: BookCreateFormComponent
+			},
 			{
 				path:'',
 				component: BookListComponent,
@@ -18,11 +23,7 @@ const bookRoutes: Routes = [
 						component: BookDetailComponent
 					}
 				]
-			},
-			// {
-			// 	path: ':id',
-			// 	component: BookDetailComponent
-			// }
+			}
 		]
 	}
 ];

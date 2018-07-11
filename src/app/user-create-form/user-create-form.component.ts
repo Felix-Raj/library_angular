@@ -34,8 +34,8 @@ export class UserCreateFormComponent implements OnInit, OnChanges {
       name: this.userCreateForm.value.name as string
     }
     this.userService.createUser(saveUser).subscribe(
-      (data: User) => console.log(data),
-      error => {console.log(error);}
+      (data: User) => console.log(data), //todo: remove
+      error => {console.log(error);} //todo: make better
     );
   }
 
