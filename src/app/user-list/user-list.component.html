@@ -14,6 +14,8 @@
 		</tbody>
 	</table>
 
+	<div *ngIf="loading" class="loader"></div>
+
 	<div *ngIf="result!=null">
 		<button *ngIf="result.next!=null" (click)="getNextList()">Load More</button>
 		<button *ngIf="result.next!=null" (click)="loadAllList()">Load All</button>

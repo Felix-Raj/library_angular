@@ -13,10 +13,12 @@ import { Book, Result } from '../class/classes';
 export class BookDetailComponent implements OnInit {
 
 	book: Book;
+  loading: boolean = false;
 
   constructor(private bookService: BookService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.loading = true;
   	this.getBook();
   }
 
@@ -29,7 +31,8 @@ export class BookDetailComponent implements OnInit {
       )
     ).subscribe(
       result=>{
-        this.book = result
+        this.loading = false;
+        this.book = result;
       }
     );
   }

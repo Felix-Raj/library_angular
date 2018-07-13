@@ -20,6 +20,8 @@
 		</tbody>
 	</table>
 
+	<div *ngIf="loading" class="loader"></div>
+
 	<div *ngIf="result!=null">
 		<button *ngIf="result.next!=null" (click)="getNextBooks()">Load More</button>
 		<button *ngIf="result.next!=null" (click)="loadAllBooks()">Load All</button>

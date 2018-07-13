@@ -7,6 +7,8 @@ export abstract class ResultList<T> {
 	result: Result<T>;
 	list: Array<T>;
 	loadAll: boolean = false;
+
+	loading: boolean = true;
 	
 	constructor(){}
 
@@ -21,6 +23,7 @@ export abstract class ResultList<T> {
 		/*
 		* Get the list of T.
 		*/
+		this.loading = true;
 		if (this.result && this.result.next == null) {
 			return ;
 		}
@@ -34,6 +37,7 @@ export abstract class ResultList<T> {
 		*/
 		this.result = results;
 		this.updateList();
+		this.loading = false;
 		if (this.loadAll) {
 			if (this.result.next == null) {
 				return ;
