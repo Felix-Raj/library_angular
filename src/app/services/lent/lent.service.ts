@@ -23,6 +23,13 @@ export class LentService {
   }
 
   createLent(lent: Lent): Observable<Lent>{
-  	return this.httpClient.post<Lent>(urls.createLent, lent, httpOptions);
+    const submitLent = {
+      lib_user: lent.lib_user.id,
+      book: lent.book.id,
+      due_on: lent.due_on,
+      lent_on: lent.lent_on,
+      duration: lent.duration? lent.duration: Lent.default_lent_period
+    };
+  	return this.httpClient.post<Lent>(urls.createLent, submitLent, httpOptions);
   }
 }

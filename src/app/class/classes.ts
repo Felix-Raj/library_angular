@@ -27,5 +27,8 @@ export class Lent {
 	lib_user: User;
 	book: Book;
 	lent_on: Date;
-	due_on: Date;
+	due_on?: Date;
+	duration?: string;
+
+	static default_lent_period = 14;
 }

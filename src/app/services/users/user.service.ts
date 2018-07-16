@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http'
 
 import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -27,6 +27,16 @@ export class UserService {
 
   getUsers(url = urls.userList): Observable<Result<User>>{
   	return this.http.get<Result<User>>(url);
+  }
+
+  getUser(search_userId: string){
+    /*
+    * Fetch a sigle user
+    */
+    const options = search_userId ? 
+      {params: new HttpParams().set('uid', search_userId)}:{};
+
+    return this.http.get<Result<User>>(urls.userList, options);
   }
 
   createUser(user: User): Observable<User>{

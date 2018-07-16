@@ -1,3 +1,53 @@
-<p>
-  lent-create works!
-</p>
+{{message}}
+<form [formGroup]="lentForm" (ngSubmit)="onSubmit()">
+	<label>User: <input formControlName="lib_user" title="Enter User Id"></label>
+	<label>Book: <input formControlName="book" title="Enter Book Id"></label>
+	<label>Duration: <input formControlName="duration" ></label>
+	<label>Lent On: <input formControlName="lent_on" ></label>
+	<label hidden="">Due On: <input formControlName="due_on"></label>
+	<button type="submit" [disabled]="lentForm.pristine">Save</button>
+</form>
+
+<div *ngIf="lentUser">
+	<table>
+		<thead>
+			<tr>
+				<th>UID</th>
+				<th>Name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let user of lentUser">
+				<td>{{user.uid}}</td>
+				<td>{{user.name}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div *ngIf="lentBook">
+	<table>
+		<thead>
+			<tr>
+				<th>Book ID</th>
+				<th>Title</th>
+				<th>Author</th>
+				<th>Tags</th>
+				<th>Copies</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let book of lentBook">
+				<td>{{book.book_id}}</td>
+				<td>{{book.title}}</td>
+				<td>{{book.author}}</td>
+				<td style="max-width: 20em">
+					<small *ngFor="let tag of book.booktag_set" style="padding: 5px">{{tag.tag}}</small>,
+				</td>
+				<td>{{book.copies}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<p>Form value : {{lentForm.value | json}} </p>

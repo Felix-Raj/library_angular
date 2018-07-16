@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 
 import { Observable } from 'rxjs';
 import { Result, Book } from '../class/classes';
@@ -24,6 +24,11 @@ export class BookService {
 
   getBooks(url = urls.bookList): Observable<Result<Book>>{
   	return this.http.get<Result<Book>>(url);
+  }
+
+  getBook(search_bookId): Observable<Result<Book>>{
+    const queries=search_bookId?{params: new HttpParams().set('book_id', search_bookId)}: {}
+    return this.http.get<Result<Book>>(urls.bookList, queries);
   }
 
   getBookDetails(id: string): Observable<Book> {
