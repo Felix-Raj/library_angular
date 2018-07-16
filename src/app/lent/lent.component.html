@@ -1,27 +1,9 @@
-<app-lent-create></app-lent-create>
-<div>
-	<table>
-		<thead>
-			<tr>
-				<th>User Name</th>
-				<th>User Id</th>
-				<th>Book</th>
-				<th>Book Lent On</th>
-				<th>Due Return</th>
-			</tr>
-		</thead>
-		<tbody *ngIf="result!=null">
-			<tr *ngFor="let lent of list">
-				<td>{{lent.lib_user.name}}</td>
-				<td>{{lent.lib_user.uid}}</td>
-				<td>{{lent.book.title}}</td>
-				<td>{{lent.lent_on}}</td>
-				<td>{{lent.due_on}}</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-<p *ngIf="result!=null">
-  <button *ngIf="result.next!=null" (click)="getNextList()">Load More</button>
-  <button *ngIf="result.next!=null" (click)="loadAllList()">Load All</button>
-</p>
+<!-- Lent Shell -->
+Lent
+<nav>
+	<a routerLink='/lent'>List</a> |
+	<a routerLink='/lent/new'>Lent</a>
+</nav>
+<main>
+	<router-outlet></router-outlet>
+</main>

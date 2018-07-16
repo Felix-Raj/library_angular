@@ -14,6 +14,9 @@ export class BookCreateFormComponent implements OnInit, OnChanges {
 	bookCreateForm: FormGroup;
 	@Input() book: Book;
 
+  myControl = new FormControl();
+  options: string[] = ['One', 'Two', 'Three'];
+
   constructor(
   	private formBuilder: FormBuilder,
   	private bookService: BookService ) { 
@@ -31,7 +34,8 @@ export class BookCreateFormComponent implements OnInit, OnChanges {
   	});
   }
 
-  onSubmit() {  	const saveBook: Book = {
+  onSubmit() {  	
+    const saveBook: Book = {
   		id: 0,
   		title: this.bookCreateForm.value.title as string,
   		author: this.bookCreateForm.value.author as string,
