@@ -22,8 +22,19 @@ export class BookService {
 
   constructor(private http: HttpClient) { }
 
-  getBooks(url = urls.bookList): Observable<Result<Book>>{
-  	return this.http.get<Result<Book>>(url);
+  getBooks(url = urls.bookList, search?:{}): Observable<Result<Book>>{
+    var httpParams: HttpParams = new HttpParams();
+    var queries= {};
+    if (search){
+      if (search['book_id'] != undefined){
+        httpParams = httpParams.set('book_id', search['book_id']);
+      }
+      if (search['title'] != undefined) {
+        httpParams = httpParams.set('title', search['title']);
+      }
+    }
+    queries={params: httpParams};
+  	return this.http.get<Result<Book>>(url, queries);
   }
 
   getBook(search_bookId): Observable<Result<Book>>{

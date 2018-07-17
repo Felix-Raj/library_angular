@@ -15,6 +15,7 @@ export class Book {
 	author: string;
 	copies: number;
 	booktag_set: Array<Tag>;
+	book_id: string;
 }
 
 export class User {

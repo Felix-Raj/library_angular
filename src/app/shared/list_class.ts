@@ -1,6 +1,9 @@
 import { Result } from '../class/classes';
 
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import {
+   debounceTime, distinctUntilChanged, switchMap
+ } from 'rxjs/operators';
 
 export abstract class ResultList<T> {
 
@@ -9,15 +12,11 @@ export abstract class ResultList<T> {
 	loadAll: boolean = false;
 
 	loading: boolean = true;
+	searchObject = new Subject<{}>();
 	
 	constructor(){}
 
-	/*
-	* Call the actual service in this function, implement
-	* this in child class. Callback is the function to 
-	* call with the result 
-	*/
-	abstract fetchList(callback, url?: string);
+	abstract _makeServiceCall(url?: string, queries?: {}): Observable<Result<T>>
 
 	getList(url?: string):void {
 		/*
@@ -27,7 +26,23 @@ export abstract class ResultList<T> {
 		if (this.result && this.result.next == null) {
 			return ;
 		}
-		this.fetchList(this.postFetchList, url);
+		this.fetchList(this._makeServiceCall(url, undefined));
+	}
+
+	/*
+	* subscribe to the observable to read the result
+	*/
+	fetchList(observable: Observable<Result<T>>){
+		observable.subscribe((data)=>this.success_function(data), (error)=>this.error_function(error))
+	}
+
+	success_function(data){
+		this.postFetchList(data);
+	}
+
+	error_function(error){
+		console.log('error in fetching list');
+		console.log(error);
 	}
 
 	postFetchList(results: Result<T>){
@@ -46,6 +61,17 @@ export abstract class ResultList<T> {
 		}
 	}
 
+	updateList():void {
+		/* update the result array */
+		if (this.list != null) {
+			for (var i = this.result.results.length - 1; i >= 0; i--) {
+				this.list.push(this.result.results[i]);
+			}
+		}else {
+			this.list = this.result.results;
+		}
+	}
+
 	getNextList():void {
 		/* Helper function to load the next set of list */
 		this.getList(this.result.next);
@@ -59,14 +85,14 @@ export abstract class ResultList<T> {
 		}
 	}
 
-	updateList():void {
-		/* update the result array */
-		if (this.list != null) {
-			for (var i = this.result.results.length - 1; i >= 0; i--) {
-				this.list.push(this.result.results[i]);
-			}
-		}else {
-			this.list = this.result.results;
-		}
+	search(){
+		this.searchObject.pipe(
+			debounceTime(300),
+      		distinctUntilChanged(),
+      		switchMap((value, index)=>{
+      			this.list = null;
+      			return this._makeServiceCall(undefined, value);
+      		})
+		).subscribe((data)=>{this.success_function(data);}, (error)=>{this.error_function(error)});
 	}
 }

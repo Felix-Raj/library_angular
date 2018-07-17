@@ -16,16 +16,12 @@ export class UserListComponent extends ResultList<User> implements OnInit {
 
   constructor(private userService: UserService) { super(); }
 
-  fetchList(callback, url?: string) {
-    this.userService.getUsers(url).subscribe(
-      users=>{
-        super.postFetchList(users);
-      }
-    );
-  }
-
   ngOnInit() {
     this.getList();
+  }
+
+  _makeServiceCall(url?, queries?){
+    return this.userService.getUsers(url);
   }
 
 }

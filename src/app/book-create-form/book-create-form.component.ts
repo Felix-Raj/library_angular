@@ -13,6 +13,7 @@ export class BookCreateFormComponent implements OnInit, OnChanges {
 
 	bookCreateForm: FormGroup;
 	@Input() book: Book;
+  message: string;
 
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
@@ -30,7 +31,8 @@ export class BookCreateFormComponent implements OnInit, OnChanges {
   	this.bookCreateForm = this.formBuilder.group({
   		title: ['', Validators.required],
   		author: ['', Validators.required],
-  		copies: ''
+  		copies: '',
+      book_id:['', Validators.required],
   	});
   }
 
@@ -40,12 +42,19 @@ export class BookCreateFormComponent implements OnInit, OnChanges {
   		title: this.bookCreateForm.value.title as string,
   		author: this.bookCreateForm.value.author as string,
   		copies: this.bookCreateForm.value.copies as number,
-  		booktag_set: []
+  		booktag_set: [],
+      book_id: this.bookCreateForm.value.book_id as string,
   	};
 
   	this.bookService.createBook(saveBook).subscribe(
-  		(data: Book) => console.log(data), // todo: remove this
-  		error=>console.log(error) //todo: make better
+  		(data: Book) => {
+        console.log(data); this.bookCreateForm.reset()
+        this.message = "success";
+      },
+  		error=>{
+        console.log(error);
+        this.message = "failed!!"
+      }
   	);
   }
 

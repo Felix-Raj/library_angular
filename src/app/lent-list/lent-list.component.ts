@@ -13,16 +13,12 @@ export class LentListComponent extends ResultList<Lent> implements OnInit {
 
   constructor(private lentServices: LentService) { super() }
 
-  fetchList(callback, url?: string) {
-    this.lentServices.getLentList(url).subscribe(
-      lents=>{
-        super.postFetchList(lents);
-      }
-    );
-  }
-
   ngOnInit() {
     this.getList();
+  }
+
+  _makeServiceCall(url?: string, queries?: {}){
+    return this.lentServices.getLentList(url);
   }
 
 }

@@ -1,4 +1,6 @@
+{{message}}
 <form [formGroup]="bookCreateForm" (ngSubmit)="onSubmit()">
+	<label>Book ID <input formControlName="book_id"></label>
 	<label>Title <input formControlName="title"></label>
 	<label>Author <input formControlName="author"></label>
 	<label>Copies <input formControlName="copies"></label>

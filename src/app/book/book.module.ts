@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule }    from '@angular/forms';
+import { ReactiveFormsModule, FormsModule }    from '@angular/forms';
 
 import { BookRoutingModule } from './book.component-routing.module';
 import { BookService } from '../services/book.service';
@@ -13,6 +13,7 @@ import { BookCreateFormComponent } from '../book-create-form/book-create-form.co
 	imports: [
 		CommonModule,
 		BookRoutingModule,
+		FormsModule,
 		ReactiveFormsModule,
 	],
 	declarations: [
