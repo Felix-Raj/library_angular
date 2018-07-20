@@ -11,6 +11,8 @@ import { ResultList } from '../shared/list_class';
 })
 export class LentListComponent extends ResultList<Lent> implements OnInit {
 
+  message: string;
+
   constructor(private lentServices: LentService) { super() }
 
   ngOnInit() {
@@ -19,6 +21,32 @@ export class LentListComponent extends ResultList<Lent> implements OnInit {
 
   _makeServiceCall(url?: string, queries?: {}){
     return this.lentServices.getLentList(url);
+  }
+
+  returnLent(lent_id: string){
+    console.log(lent_id);
+    this.lentServices.returnLent(lent_id).subscribe(
+      (data)=>{
+        this.message='Operation successful';
+        var cp = this.list.map((lent)=>{
+          if (lent.id == lent_id) {
+          }else{
+            return lent;
+          }
+        });
+
+        this.list = cp;
+      },
+      (error)=>{console.log('error in returning lent'); console.log(error);this.message='Failed to return'}
+    );
+    this.removemessage();
+  }
+
+  removemessage(){
+    setTimeout(
+      ()=>{this.message=''},
+      3000
+    );
   }
 
 }

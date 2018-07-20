@@ -15,6 +15,8 @@ export class BookDetailComponent implements OnInit {
 	book: Book;
   loading: boolean = false;
 
+  message: string;
+
   constructor(private bookService: BookService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -34,6 +36,40 @@ export class BookDetailComponent implements OnInit {
         this.loading = false;
         this.book = result;
       }
+    );
+  }
+
+  toggleLock(): void{
+    if (this.book.locked) {
+      this.bookService.unlock(this.book.id).subscribe(
+        (data)=>{
+          if(data.locked){
+            this.message='operation failed';
+          }else{
+            this.message = 'operation successful';
+          }
+          this.book = data;
+        }
+      );
+    }else{
+      this.bookService.lock(this.book.id).subscribe(
+        data=>{
+          if (!data.locked) {
+            this.message = 'operation failed';
+          } else{
+            this.message = 'operation successful';
+          }
+          this.book = data;
+        }
+      );
+    }
+    this.clearMessage();
+  }
+
+  clearMessage(){
+    setTimeout(
+       ()=>{this.message=''},
+       3000
     );
   }
 

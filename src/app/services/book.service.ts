@@ -13,6 +13,8 @@ export const baseUrl = 'http://127.0.0.1:8000'
 const urls = {
 	bookList: baseUrl+'/book/',
   createBook: baseUrl+'/book/new/',
+  lock: baseUrl+'/book/<book_id>/lock',
+  unlock: baseUrl+'/book/<book_id>/unlock',
 }
 
 @Injectable({
@@ -49,5 +51,13 @@ export class BookService {
 
   createBook(book: Book): Observable<Book> {
     return this.http.post<Book>(urls.createBook, book, httpOptions);
+  }
+
+  lock(book_id: number): Observable<Book>{
+    return this.http.get<Book>(urls.lock.replace('<book_id>', ''+book_id), httpOptions);
+  }
+
+  unlock(book_id: number): Observable<Book>{
+    return this.http.get<Book>(urls.unlock.replace('<book_id>', ''+book_id), httpOptions);
   }
 }

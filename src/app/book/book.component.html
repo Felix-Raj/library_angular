@@ -1,8 +1,15 @@
 <!-- Book Shell -->
-Books
-<nav>
-	<a routerLink='/book'>List</a> |
-	<a routerLink='/book/new'>Add Book</a>
+<nav class="navbar navbar-expand navbar-light flex-column flex-md-row bd-navbar">
+	<div class="navbar-nav-scroll">
+		<ul class="navbar-nav bd-navbar-nav flex-row">
+			<li class="nav-item">
+				<a class="nav-link" routerLink='/book'>List</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" routerLink='/book/new'>Add Book</a>
+			</li>
+		</ul>
+	</div>
 </nav>
 <main>
 	<router-outlet></router-outlet>

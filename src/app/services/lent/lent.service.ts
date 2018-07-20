@@ -5,10 +5,11 @@ import { Observable } from 'rxjs';
 import { Lent, Result } from '../../class/classes';
 import { baseUrl, httpOptions } from '../book.service';
 
-
+const lentUrl = baseUrl+'/lib_user/lent';
 const urls = {
-	lentList: baseUrl+'/lib_user/lent/',
-	createLent: baseUrl+'/lib_user/lent/new/',
+	lentList: lentUrl,
+  createLent: lentUrl+'/new/',
+	returnLent: lentUrl+'/return/<lent_id>/',
 }
 
 @Injectable({
@@ -31,5 +32,9 @@ export class LentService {
       duration: lent.duration? lent.duration: Lent.default_lent_period
     };
   	return this.httpClient.post<Lent>(urls.createLent, submitLent, httpOptions);
+  }
+
+  returnLent(lent_id: string): Observable<any>{
+    return this.httpClient.delete<any>(urls.returnLent.replace('<lent_id>', lent_id), httpOptions);
   }
 }

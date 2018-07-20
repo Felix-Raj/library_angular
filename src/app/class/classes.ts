@@ -16,6 +16,9 @@ export class Book {
 	copies: number;
 	booktag_set: Array<Tag>;
 	book_id: string;
+	locked?: boolean;
+	copies_on_lent?: number;
+	is_availabled?: boolean;
 }
 
 export class User {
@@ -25,6 +28,7 @@ export class User {
 }
 
 export class Lent {
+	id?: string;
 	lib_user: User;
 	book: Book;
 	lent_on: Date;

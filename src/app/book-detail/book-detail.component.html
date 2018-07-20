@@ -1,4 +1,5 @@
 <div *ngIf="loading" class="loader"></div>
+{{message}}
 <div *ngIf="book!=null">
 	<strong>Book ID</strong>: <strong>{{book.book_id}}</strong>
 	<strong>Title</strong>	: <strong>{{book.title}}</strong><br>
@@ -8,4 +9,8 @@
 		<small *ngFor="let tag of book.booktag_set" style="padding: 5px">{{tag.tag}}</small>,
 	</div><br>
 	<strong>Copies</strong>	: <strong>{{book.copies}}</strong><br>
+	<button (click)="toggleLock()">
+		<em *ngIf="book.locked; else lock">Unlock</em>
+		<ng-template #lock><em>Lock</em></ng-template>
+	</button>
 </div>
