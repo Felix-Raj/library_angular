@@ -2,8 +2,8 @@
 	<div *ngIf="result!=null">
 		<label>Search Book Id: <input #book_id (keyup)="search_book('book_id',book_id.value)"></label>
 		<label>Search Title: <input  #title (keyup)="search_book('title', title.value)"></label>
-		<label>Search Author : <input disabled=""></label>
-		<label>Search Tags: <input disabled=""></label>
+		<label>Search Author : <input #author (keyup)="search_book('author', author.value)"></label>
+		<label>Search Tags: <input #tags (keyup)="search_book('booktag__tag', tags.value)"></label>
 	</div>
 	{{searchable | json}}
 </div>

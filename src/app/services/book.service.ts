@@ -28,11 +28,17 @@ export class BookService {
     var httpParams: HttpParams = new HttpParams();
     var queries= {};
     if (search){
-      if (search['book_id'] != undefined){
+      if (search['book_id'] != ''){
         httpParams = httpParams.set('book_id', search['book_id']);
       }
-      if (search['title'] != undefined) {
+      if (search['title'] != '') {
         httpParams = httpParams.set('title', search['title']);
+      }
+      if (search['author'] != '') {
+        httpParams = httpParams.set('author', search['author']);
+      }
+      if (search['booktag__tag'] != '') {
+        httpParams = httpParams.set('booktag__tag', search['booktag__tag']);
       }
     }
     queries={params: httpParams};
