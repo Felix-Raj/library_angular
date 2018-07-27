@@ -16,7 +16,7 @@ import { ResultList } from '../shared/list_class';
 export class BookListComponent extends  ResultList<Book> implements OnInit{
 
   searchable={
-    book_id:'',title:'', author:'', booktag__tag:''
+    book_id:'',title:'', author:'', booktag__tag:'', category:'',
   }
 
   constructor(private bookService: BookService) { 
@@ -46,7 +46,8 @@ export class BookListComponent extends  ResultList<Book> implements OnInit{
       book_id : this.searchable.book_id,
       title: this.searchable.title,
       author: this.searchable.author,
-      booktag__tag: this.searchable.booktag__tag
+      booktag__tag: this.searchable.booktag__tag,
+      category: this.searchable.category,
     };
     this.searchObject.next(obj);
   }

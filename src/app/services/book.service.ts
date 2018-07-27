@@ -9,7 +9,7 @@ export const httpOptions = {
 };
 
 export const baseUrl = 'http://127.0.0.1:8000'
-//export const baseUrl = 'https://boiling-scrubland-41951.herokuapp.com';
+// export const baseUrl = 'https://boiling-scrubland-41951.herokuapp.com';
 const urls = {
 	bookList: baseUrl+'/book/',
   createBook: baseUrl+'/book/new/',
@@ -39,6 +39,9 @@ export class BookService {
       }
       if (search['booktag__tag'] != '') {
         httpParams = httpParams.set('booktag__tag', search['booktag__tag']);
+      }
+      if (search['category'] != '') {
+        httpParams = httpParams.set('category', search['category']);
       }
     }
     queries={params: httpParams};

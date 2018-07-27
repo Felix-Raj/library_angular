@@ -4,12 +4,14 @@
 			<tr>
 				<th>UID</th>
 				<th>Name</th>
+				<th>Date of Birth</th>
 			</tr>
 		</thead>
 		<tbody *ngIf="result!=null">
 			<tr *ngFor="let user of list">
 				<td>{{user.uid}}</td>
 				<td>{{user.name}}</td>
+				<td>{{user.date_of_birth}}</td>
 			</tr>
 		</tbody>
 	</table>

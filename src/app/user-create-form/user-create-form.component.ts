@@ -31,7 +31,8 @@ export class UserCreateFormComponent implements OnInit, OnChanges {
     const saveUser: User = {
       id: '0',
       uid: this.userCreateForm.value.uid as string,
-      name: this.userCreateForm.value.name as string
+      name: this.userCreateForm.value.name as string,
+      date_of_birth: this.userCreateForm.value.date_of_birth as string,
     }
     this.userService.createUser(saveUser).subscribe(
       (data: User) => console.log(data), //todo: remove
@@ -42,7 +43,8 @@ export class UserCreateFormComponent implements OnInit, OnChanges {
   createForm(){
     this.userCreateForm = this.formBuilder.group({
       uid: '',
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      date_of_birth: '',
     });
   }
 

@@ -5,11 +5,11 @@ import { Observable } from 'rxjs';
 import { Lent, Result } from '../../class/classes';
 import { baseUrl, httpOptions } from '../book.service';
 
-const lentUrl = baseUrl+'/lib_user/lent';
+const lentUrl = baseUrl+'/lib_user/lent/';
 const urls = {
 	lentList: lentUrl,
-  createLent: lentUrl+'/new/',
-	returnLent: lentUrl+'/return/<lent_id>/',
+  createLent: lentUrl+'new/',
+	returnLent: lentUrl+'return/<lent_id>/',
 }
 
 @Injectable({

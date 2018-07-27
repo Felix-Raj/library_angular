@@ -19,12 +19,15 @@ export class Book {
 	locked?: boolean;
 	copies_on_lent?: number;
 	is_availabled?: boolean;
+	category?: string;
 }
+export const book_categories = ['magazine', 'comics', 'books'];
 
 export class User {
 	id: string;
 	uid: string;
 	name: string;
+	date_of_birth?: string;
 }
 
 export class Lent {

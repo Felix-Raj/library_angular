@@ -11,12 +11,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserModule } from './user/user.module';
 import { BookModule } from './book/book.module';
 import { LentModule } from './lent/lent.module';
+import { UserRecentBirthdayListComponent } from './user-recent-birthday-list/user-recent-birthday-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DummyComponent,
     DashboardComponent,
+    UserRecentBirthdayListComponent,
   ],
   imports: [
     BrowserModule,

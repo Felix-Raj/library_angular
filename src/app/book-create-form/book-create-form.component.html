@@ -1,8 +1,34 @@
-{{message}}
+{{errors.error | json }}
 <form [formGroup]="bookCreateForm" (ngSubmit)="onSubmit()">
-	<label>Book ID <input formControlName="book_id"></label>
-	<label>Title <input formControlName="title"></label>
-	<label>Author <input formControlName="author"></label>
-	<label>Copies <input formControlName="copies"></label>
-	<button type="submit" [disabled]="bookCreateForm.pristine">Save</button>
+	<div class="form-group">
+		<div *ngIf="errors"><div *ngIf="errors.book_id">EE</div></div>
+		<label for="book_id">Book Id</label>
+		<input type="text" name="book_id" class="form-control" id="book_id" placeholder="Book ID" formControlName="book_id">
+	</div>
+	<div class="form-group">
+		<label for="title">Title</label>
+		<input type="text" name="title" class="form-control" id="title" placeholder="Book Title" formControlName="title">
+	</div>
+	<div class="form-group">
+		<label for="author">Author</label>
+		<input type="text" name="author" id="author" class="form-control" placeholder="Author" formControlName="author">
+	</div>
+	<div class="form-group">
+		<label for="copies">Copies</label>
+		<input type="number" name="copies" id="copies" class="form-control" placeholder="Copies" formControlName="copies">
+	</div>
+	<div class="form-group">
+		<label for="category">Category</label>
+		<select class="form-control" id="category" formControlName="category" class="form-control" name="category">
+			<option *ngFor="let cat of book_categories" value="{{cat}}">{{cat | uppercase }}</option>
+		</select>
+	</div>
+	<div class="form-check form-group">
+		<input class="form-check-input" type="checkbox" id="locked" formControlName="locked">
+		<label class="form-check-label" for="locked">Check to lock the book</label>
+	</div>
+
+	<!-- todo : add field for adding tags-->
+
+	<button type="submit" [disabled]="bookCreateForm.pristine" class="btn btn-primary">Save</button>
 </form>

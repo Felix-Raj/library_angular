@@ -23,7 +23,7 @@
               "src/logo.ico",
               "src/logo.png",
               "src/assets",
-              "src/assets/images",
+              "src/assets/images"
             ],
             "styles": [
               "src/styles.css"

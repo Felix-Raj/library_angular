@@ -1,0 +1,17 @@
+<div class="table-responsive">
+	<table class="table table-striped table-hover table-sm">
+		<caption>Coming up birthdays</caption>
+		<thead class="thead-dark">
+			<tr>
+				<th>Name</th>
+				<th>Birthday on</th>
+			</tr>
+		</thead>
+		<tbody *ngIf="birthdays">
+			<tr *ngFor="let user of birthdays">
+				<td>{{user.name}}</td>
+				<td>{{user.date_of_birth}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

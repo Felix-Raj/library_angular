@@ -1,6 +1,7 @@
 <form [formGroup]="userCreateForm" (ngSubmit)="onSubmit()">
 	<label>UID: <input formControlName="uid"> </label>
 	<label>Name: <input formControlName="name"> </label>
+	<label>Date Of Birth<input type="date" formControlName="date_of_birth"></label>
 	<div *ngIf="name.invalid && (name.dirty || name.touched)"
     class="alert alert-danger">
     	<div *ngIf="name.errors.required">

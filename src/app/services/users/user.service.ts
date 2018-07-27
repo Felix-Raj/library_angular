@@ -15,7 +15,8 @@ const user_base_url = baseUrl + '/lib_user/'
 
 const urls = {
 	userList : user_base_url,
-	newUser: user_base_url+'new/'
+	newUser: user_base_url+'new/',
+  recentBirthdays: user_base_url+'birthdays/',
 }
 
 @Injectable({
@@ -42,6 +43,10 @@ export class UserService {
   createUser(user: User): Observable<User>{
   	console.log('creating user');
   	return this.http.post<User>(urls.newUser, user, httpOptions);
+  }
+
+  getRecentBirthdays(): Observable<Result<User>> {
+    return this.http.get<Result<User>>(urls.recentBirthdays, httpOptions);
   }
 
   handleError<T>(err: HttpErrorResponse){

@@ -2,7 +2,7 @@ import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 import { BookService } from '../services/book.service';
-import { Book } from '../class/classes';
+import { Book, book_categories } from '../class/classes';
 
 @Component({
   selector: 'app-book-create-form',
@@ -14,6 +14,8 @@ export class BookCreateFormComponent implements OnInit, OnChanges {
 	bookCreateForm: FormGroup;
 	@Input() book: Book;
   message: string;
+  errors: {};
+  book_categories = book_categories;
 
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
@@ -28,11 +30,14 @@ export class BookCreateFormComponent implements OnInit, OnChanges {
 
   createForm(){
   	//todo: review used validators
+    // todo : add validators for book category
   	this.bookCreateForm = this.formBuilder.group({
   		title: ['', Validators.required],
   		author: ['', Validators.required],
   		copies: '',
       book_id:['', Validators.required],
+      locked: false,
+      category: this.book_categories[0].toUpperCase(),
   	});
   }
 
@@ -44,6 +49,8 @@ export class BookCreateFormComponent implements OnInit, OnChanges {
   		copies: this.bookCreateForm.value.copies as number,
   		booktag_set: [],
       book_id: this.bookCreateForm.value.book_id as string,
+      locked: this.bookCreateForm.value.locked as boolean,
+      category: this.bookCreateForm.value.category as string
   	};
 
   	this.bookService.createBook(saveBook).subscribe(
@@ -52,8 +59,10 @@ export class BookCreateFormComponent implements OnInit, OnChanges {
         this.message = "success";
       },
   		error=>{
+        console.log('---error----');
         console.log(error);
         this.message = "failed!!"
+        this.errors = error.error;
       }
   	);
   }
