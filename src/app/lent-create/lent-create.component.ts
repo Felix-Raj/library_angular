@@ -17,6 +17,7 @@ export class LentCreateComponent implements OnInit {
 	lentForm: FormGroup;
   lentUser: Array<User>;
   lentBook: Array<Book>;
+  userLentStatus: Array<Lent>;
   /* both lentUser and lentBook can have an intermediate value containing more than one entries*/
   message: string;
 
@@ -62,6 +63,9 @@ export class LentCreateComponent implements OnInit {
     this.userService.getUser(userId).subscribe(
       data=>{
         this.lentUser = data.results;
+        if (data.results.length == 1) {
+          this.getUserLentStatus(data.results[0].id);
+        }
       }
     );
   }
@@ -74,6 +78,17 @@ export class LentCreateComponent implements OnInit {
     this.bookService.getBook(bookId).subscribe(
       data=>{this.lentBook=data.results;}
     )
+  }
+
+  getUserLentStatus(userId: string){
+    /*
+    * Loads the lent status of an user, when the value of user ID is completly entered
+    */
+    this.userLentStatus=new Array<Lent>;
+    this.userService.getPendinglents(userId).subscribe(
+      data=>{this.userLentStatus=data; this.message=''},
+      error=>{this.message='Failed to load user lent detials!'}
+    );
   }
 
   onSubmit(){

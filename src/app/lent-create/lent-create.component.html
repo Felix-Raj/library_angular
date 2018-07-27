@@ -25,6 +25,15 @@
 	</table>
 </div>
 
+<div *ngIf="userLentStatus">
+	<ul>
+		<li *ngFor="let lent of userLentStatus">
+			BOOK: {{lent.book.title}}({{lent.book.book_id}})<br>
+			DUE ON:{{lent.due_on}}
+		</li>
+	</ul>
+</div>
+
 <div *ngIf="lentBook">
 	<table>
 		<thead>

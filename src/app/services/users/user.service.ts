@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular
 import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Result, User } from '../../class/classes';
+import { Result, User, Lent } from '../../class/classes';
 import { baseUrl } from '../book.service';
 
 const httpOptions = {
@@ -17,6 +17,7 @@ const urls = {
 	userList : user_base_url,
 	newUser: user_base_url+'new/',
   recentBirthdays: user_base_url+'birthdays/',
+  pendingLents:user_base_url+'$/lent/pending/',
 }
 
 @Injectable({
@@ -47,6 +48,10 @@ export class UserService {
 
   getRecentBirthdays(): Observable<Result<User>> {
     return this.http.get<Result<User>>(urls.recentBirthdays, httpOptions);
+  }
+
+  getPendinglents(userId: string): Observable<Array<Lent>> {
+    return this.http.get<Array<Lent>>(urls.pendingLents.replace('$', userId), httpOptions);
   }
 
   handleError<T>(err: HttpErrorResponse){
