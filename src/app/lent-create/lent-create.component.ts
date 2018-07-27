@@ -84,7 +84,7 @@ export class LentCreateComponent implements OnInit {
     /*
     * Loads the lent status of an user, when the value of user ID is completly entered
     */
-    this.userLentStatus=new Array<Lent>;
+    this.userLentStatus=new Array<Lent>();
     this.userService.getPendinglents(userId).subscribe(
       data=>{this.userLentStatus=data; this.message=''},
       error=>{this.message='Failed to load user lent detials!'}

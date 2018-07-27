@@ -14,7 +14,7 @@ export class BookCreateFormComponent implements OnInit, OnChanges {
 	bookCreateForm: FormGroup;
 	@Input() book: Book;
   message: string;
-  errors: {};
+  errors: {error:''};
   book_categories = book_categories;
 
   myControl = new FormControl();
