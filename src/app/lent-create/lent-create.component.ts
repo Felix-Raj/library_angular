@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Observable, Subject } from 'rxjs';
+import {
+   debounceTime, distinctUntilChanged, switchMap
+ } from 'rxjs/operators';
 
 import { Lent, User, Book, Result } from '../class/classes';
 import { LentService } from '../services/lent/lent.service';
@@ -20,6 +24,8 @@ export class LentCreateComponent implements OnInit {
   userLentStatus: Array<Lent>;
   /* both lentUser and lentBook can have an intermediate value containing more than one entries*/
   message: string;
+  searchUser = new Subject<string>();
+  searchBook = new Subject<string>();
 
   constructor(
     private formBuilder: FormBuilder, private lentService: LentService,
@@ -29,6 +35,21 @@ export class LentCreateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.searchBook.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((value, index)=>{
+        return this.bookService.getBook(value);
+      })
+    ).subscribe((data)=>{this.lentBook=data.results;}, (error)=>{console.log(error);});
+
+    this.searchUser.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((value, index)=>{
+        return this.userService.getUser(value);
+      })
+    ).subscribe((data)=>{this.lentUser=data.results;}, (error)=>{console.log(error);});
   }
 
   createForm(){
@@ -46,38 +67,13 @@ export class LentCreateComponent implements OnInit {
       return ;
     } else {
       this.lentForm.get('lib_user').valueChanges.forEach(
-        value=>{this.getUser(value);}
+        value=>{this.searchUser.next(value)}
       );
 
       this.lentForm.get('book').valueChanges.forEach(value=>
-        {this.getBook(value)}
+        {this.searchBook.next(value)}
       );
     }
-  }
-
-  getUser(userId:string){
-    /*
-    * Load the user whose ID was entered in the form. Sets the value of
-    * lentUser property
-    */
-    this.userService.getUser(userId).subscribe(
-      data=>{
-        this.lentUser = data.results;
-        if (data.results.length == 1) {
-          this.getUserLentStatus(data.results[0].id);
-        }
-      }
-    );
-  }
-
-  getBook(bookId: string){
-    /*
-    * Load the book whose ID was enterd in the form. Sets the value of
-    * lentBook property
-    */
-    this.bookService.getBook(bookId).subscribe(
-      data=>{this.lentBook=data.results;}
-    )
   }
 
   getUserLentStatus(userId: string){
