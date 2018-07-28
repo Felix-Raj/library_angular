@@ -43,6 +43,7 @@
 				<th>Author</th>
 				<th>Tags</th>
 				<th>Copies</th>
+				<th>Copies on Lent</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -54,6 +55,7 @@
 					<small *ngFor="let tag of book.booktag_set" style="padding: 5px">{{tag.tag}}</small>,
 				</td>
 				<td>{{book.copies}}</td>
+				<td>{{book.copies_on_lent}}</td>
 			</tr>
 		</tbody>
 	</table>
