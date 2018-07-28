@@ -9,6 +9,12 @@ export class Tag {
 	tag: string;
 }
 
+export class Avatar {
+	filename: string;
+	filetype: string;
+	value: string|any;
+}
+
 export class Book {
 	id: number;
 	title: string;
@@ -20,14 +26,9 @@ export class Book {
 	copies_on_lent?: number;
 	is_availabled?: boolean;
 	category?: string;
+	preview?: Avatar;
 }
 export const book_categories = ['magazine', 'comics', 'books'];
-
-export class Avatar {
-	filename: string;
-	filetype: string;
-	value: string|any;
-}
 
 export class User {
 	id: string;

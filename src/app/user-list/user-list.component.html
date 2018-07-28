@@ -1,32 +1,34 @@
-<div>
-	<table>
-		<thead>
-			<tr>
-				<th>UID</th>
-				<th>Name</th>
-				<th>Date of Birth</th>
-				<th>Image</th>
-			</tr>
-		</thead>
-		<tbody *ngIf="result!=null">
-			<tr *ngFor="let user of list">
-				<td>{{user.uid}}</td>
-				<td>{{user.name}}</td>
-				<td>{{user.date_of_birth}}</td>
-				<td><img [src]="_image_src(user.avatar)" class="img-thumbnail rounded-circle" style="width: 75 px; height: 75 px;" /></td>
-			</tr>
-		</tbody>
-	</table>
-
-	<div class="app-loading" *ngIf="loading">
-	    <div class="logo"></div>
-	    <svg class="spinner" viewBox="25 25 50 50">
-	      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
-	    </svg>
+<div class="row">
+	<div class="col">
+		<div class="table-responsive">
+			<table class="table table-stripped table-bordered table-hover table-sm">
+				<thead class="thead-light">
+					<tr>
+						<th>UID</th>
+						<th>Name</th>
+						<th>DOB</th>
+						<th>Avatar</th>
+					</tr>
+				</thead>
+				<tbody *ngIf="result!=null">
+					<tr *ngFor="let user of list">
+						<td>{{user.uid}}</td>
+						<td>{{user.name}}</td>
+						<td>{{user.date_of_birth}}</td>
+						<td><img [src]="_image_src(user.avatar)" class="img-thumbnail rounded-circle" style="width: 75px; height: 75px;" /></td>
+					</tr>
+				</tbody>
+			</table>
+			<div *ngIf="result!=null" class="btn-group">
+				<button *ngIf="result.next!=null" (click)="getNextList()" class="btn btn-primary">Load More</button>
+				<button *ngIf="result.next!=null" (click)="loadAllList()" class="btn btn-primary">Load All</button>
+			</div>
+		</div>
 	</div>
-
-	<div *ngIf="result!=null">
-		<button *ngIf="result.next!=null" (click)="getNextList()">Load More</button>
-		<button *ngIf="result.next!=null" (click)="loadAllList()">Load All</button>
-	</div>
+</div>
+<div class="app-loading" *ngIf="loading">
+    <div class="logo"></div>
+    <svg class="spinner" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
 </div>

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { BookService } from '../services/book.service';
-import { Book, Result } from '../class/classes';
+import { Book, Result, Avatar } from '../class/classes';
 
 @Component({
   selector: 'app-book-detail',
@@ -17,7 +18,7 @@ export class BookDetailComponent implements OnInit {
 
   message: string;
 
-  constructor(private bookService: BookService, private route: ActivatedRoute) { }
+  constructor(private bookService: BookService, private route: ActivatedRoute, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.loading = true;
@@ -64,6 +65,10 @@ export class BookDetailComponent implements OnInit {
       );
     }
     this.clearMessage();
+  }
+
+  _image_src(avatar: Avatar){
+    return this.sanitizer.bypassSecurityTrustUrl("data:"+avatar.filetype+";base64, "+avatar.value);
   }
 
   clearMessage(){

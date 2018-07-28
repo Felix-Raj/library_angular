@@ -38,6 +38,7 @@ export class BookCreateFormComponent implements OnInit, OnChanges {
       book_id:['', Validators.required],
       locked: false,
       category: this.book_categories[0].toUpperCase(),
+      preview: null,
   	});
   }
 
@@ -50,7 +51,8 @@ export class BookCreateFormComponent implements OnInit, OnChanges {
   		booktag_set: [],
       book_id: this.bookCreateForm.value.book_id as string,
       locked: this.bookCreateForm.value.locked as boolean,
-      category: this.bookCreateForm.value.category as string
+      category: this.bookCreateForm.value.category as string,
+      preview: this.bookCreateForm.value.preview
   	};
 
   	this.bookService.createBook(saveBook).subscribe(
@@ -65,6 +67,25 @@ export class BookCreateFormComponent implements OnInit, OnChanges {
         this.errors = error.error;
       }
   	);
+  }
+
+  onFileChange(event) {
+    let reader = new FileReader();
+    if(event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.bookCreateForm.get('preview').setValue({
+          filename: file.name,
+          filetype: file.type,
+          value: reader.result.split(',')[1]
+        })
+      };
+    }
+  }
+
+  clearFile() {
+    this.bookCreateForm.get('preview').setValue(null);
   }
 
   rebuildForm(){
