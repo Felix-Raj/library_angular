@@ -11,6 +11,7 @@ import { Result, User } from '../class/classes';
 export class UserRecentBirthdayListComponent implements OnInit {
 
 	birthdays:Result<User>;
+	loading = true;
 
   constructor(private userService: UserService) { }
 
@@ -20,7 +21,7 @@ export class UserRecentBirthdayListComponent implements OnInit {
 
   getRecentBirthdays(){
   	this.userService.getRecentBirthdays().subscribe(
-  		data=>this.birthdays=data,
+  		data=>{this.birthdays=data; this.loading=false},
   		error=>console.log(error)
   	)
   }

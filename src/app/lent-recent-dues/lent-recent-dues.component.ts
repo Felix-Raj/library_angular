@@ -12,8 +12,9 @@ import { Lent } from '../class/classes';
 })
 export class LentRecentDuesComponent implements OnInit {
 
-	recentDues: Array<Lent>
-	message=''
+	recentDues: Array<Lent>;
+	loading = true;
+	message='';
 
   constructor(private lentService: LentService) {}
 
@@ -23,7 +24,7 @@ export class LentRecentDuesComponent implements OnInit {
 
   getRecentDues(){
   	this.lentService.recentDues().subscribe(
-  		data=>{this.recentDues = data;},
+  		data=>{this.recentDues = data; this.loading=false;},
   		error=>{this.message = error;}
 	);
   }
