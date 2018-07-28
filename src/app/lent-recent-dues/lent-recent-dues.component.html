@@ -1,0 +1,25 @@
+<div class="table-responsive">
+	<table class="table table-hover table-sm">
+		<caption>Missed and Recent Lents</caption>
+		<thead class="thead-dark">
+			<tr>
+				<th>User Name</th>
+				<th>User Id</th>
+				<th>Book</th>
+				<th>Book Lent On</th>
+				<th>Due</th>
+				<th>Return</th>
+			</tr>
+		</thead>
+		<tbody *ngIf="recentDues">
+			<tr *ngFor="let lent of recentDues">
+				<td>{{lent.lib_user.name}}</td>
+				<td>{{lent.lib_user.uid}}</td>
+				<td>{{lent.book.title}}</td>
+				<td>{{lent.lent_on}}</td>
+				<td>{{lent.due_on}}</td>
+				<button *ngIf="lent.id" class="btn btn-primary" (click)="returnLent(lent.id)">Return</button>
+			</tr>
+		</tbody>
+	</table>
+</div>
