@@ -1,3 +1,21 @@
-<p>
-  book-gallery-view works!
-</p>
+<div class="row">
+	<div class="col">
+		<div class="card-columns" *ngIf="result!=null">
+			<div class="card" *ngFor="let book of list">
+				<img class="card-img-top" [src]="_image_src(book.preview)" alt="Card image cap">
+				<div class="card-body">
+					<h5 class="card-title">
+					<a [routerLink]="[book.id]">{{book.title}}</a>
+					</h5>
+					<p class="card-text">{{book.author}}</p>
+					<p class="card-text">{{book.copies_on_lent}} on lent out of {{book.copies}}</p>
+				</div>
+			</div>
+		</div>
+		</div> <!-- col fin -->
+		<div class="col">
+			<div class="jumbotron">
+				<router-outlet></router-outlet>
+			</div>
+		</div>
+		</div> <!-- row fin -->

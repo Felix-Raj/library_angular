@@ -4,6 +4,7 @@ import { BookComponent } from './book.component';
 import { BookDetailComponent } from '../book-detail/book-detail.component';
 import { BookListComponent } from '../book-list/book-list.component';
 import { BookCreateFormComponent } from '../book-create-form/book-create-form.component';
+import { BookGalleryViewComponent } from '../book-gallery-view/book-gallery-view.component';
 
 const bookRoutes: Routes = [
 	{
@@ -13,6 +14,16 @@ const bookRoutes: Routes = [
 			{
 				path: 'new',
 				component: BookCreateFormComponent
+			},
+			{
+				path: 'gallery',
+				component: BookGalleryViewComponent,
+				children: [
+					{
+						path: ':id',
+						component: BookDetailComponent
+					}
+				]
 			},
 			{
 				path:'',

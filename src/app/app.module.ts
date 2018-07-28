@@ -13,7 +13,6 @@ import { BookModule } from './book/book.module';
 import { LentModule } from './lent/lent.module';
 import { UserRecentBirthdayListComponent } from './user-recent-birthday-list/user-recent-birthday-list.component';
 import { LentRecentDuesComponent } from './lent-recent-dues/lent-recent-dues.component';
-import { BookGalleryViewComponent } from './book-gallery-view/book-gallery-view.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,6 @@ import { BookGalleryViewComponent } from './book-gallery-view/book-gallery-view.
     DashboardComponent,
     UserRecentBirthdayListComponent,
     LentRecentDuesComponent,
-    BookGalleryViewComponent,
   ],
   imports: [
     BrowserModule,
