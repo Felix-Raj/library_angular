@@ -65,6 +65,10 @@ export class UserCreateFormComponent implements OnInit, OnChanges {
     }
   }
 
+  clearFile() {
+    this.userCreateForm.get('avatar').setValue(null);
+  }
+
   rebuildForm() {
     this.userCreateForm.reset(this.user);
   }
