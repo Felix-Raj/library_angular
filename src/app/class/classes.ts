@@ -23,11 +23,18 @@ export class Book {
 }
 export const book_categories = ['magazine', 'comics', 'books'];
 
+export class Avatar {
+	filename: string;
+	filetype: string;
+	value: string|any;
+}
+
 export class User {
 	id: string;
 	uid: string;
 	name: string;
 	date_of_birth?: string;
+	avatar?: Avatar;
 }
 
 export class Lent {

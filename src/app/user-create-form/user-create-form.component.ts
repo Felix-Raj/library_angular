@@ -33,6 +33,7 @@ export class UserCreateFormComponent implements OnInit, OnChanges {
       uid: this.userCreateForm.value.uid as string,
       name: this.userCreateForm.value.name as string,
       date_of_birth: this.userCreateForm.value.date_of_birth as string,
+      avatar: this.userCreateForm.value.avatar,
     }
     this.userService.createUser(saveUser).subscribe(
       (data: User) => console.log(data), //todo: remove
@@ -45,7 +46,23 @@ export class UserCreateFormComponent implements OnInit, OnChanges {
       uid: '',
       name: ['', Validators.required],
       date_of_birth: '',
+      avatar:null,
     });
+  }
+
+  onFileChange(event) {
+    let reader = new FileReader();
+    if(event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.userCreateForm.get('avatar').setValue({
+          filename: file.name,
+          filetype: file.type,
+          value: reader.result.split(',')[1]
+        })
+      };
+    }
   }
 
   rebuildForm() {

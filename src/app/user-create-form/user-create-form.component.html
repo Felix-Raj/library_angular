@@ -2,6 +2,12 @@
 	<label>UID: <input formControlName="uid"> </label>
 	<label>Name: <input formControlName="name"> </label>
 	<label>Date Of Birth<input type="date" formControlName="date_of_birth"></label>
+  <div class="form-group">
+    <label for="avatar">Avatar</label>
+    <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
+    <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">clear file</button>
+  </div>
+
 	<div *ngIf="name.invalid && (name.dirty || name.touched)"
     class="alert alert-danger">
     	<div *ngIf="name.errors.required">
