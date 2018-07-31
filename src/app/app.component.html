@@ -1,27 +1,31 @@
-<div class="top-logo-container">
-	<div class="logo"></div>
-</div>
-<header class="navbar navbar-expand navbar-light flex-column flex-md-row bd-navbar justify-content-center">
-	<div class="navbar-nav-scroll">
-		<ul class="navbar-nav bd-navbar-nav flex-row nav-tabs" (click)="navClicked($event)">
-			<li class="nav-item">
-				<a class="nav-link" routerLink='/'>Dashboard</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" routerLink='/book'>Books</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" routerLink='/user/'>Users</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" routerLink='/lent/'>Lent</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" routerLink='/dummy'>Dummy</a>
-			</li>
-		</ul>
+<div style="background-color: white">
+	<div class="top-logo-container">
+		<div class="logo"></div>
 	</div>
-</header>
-<main class="main-content">
+</div>
+<div style="background-color: white">
+	<header class="navbar navbar-expand navbar-light flex-column flex-md-row bd-navbar justify-content-center">
+		<div class="navbar-nav-scroll">
+			<ul class="navbar-nav bd-navbar-nav flex-row nav-tabs" (click)="navClicked($event)">
+				<li class="nav-item">
+					<a class="nav-link" routerLink='/'>Dashboard</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLink='/book'>Books</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLink='/user/'>Users</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLink='/lent/'>Lent</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLink='/dummy'>Dummy</a>
+				</li>
+			</ul>
+		</div>
+	</header>
+</div>
+<main class="container-fluid">
   <router-outlet></router-outlet>
 </main>
