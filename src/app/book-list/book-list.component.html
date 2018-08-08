@@ -77,7 +77,9 @@
 		</div>
 	</div>
 	<div class="col">
-		<router-outlet></router-outlet>
+		<div style="position: sticky; top: 0;">
+			<router-outlet></router-outlet>
+		</div>
 	</div>
 </div>
 <div class="app-loading" *ngIf="loading">

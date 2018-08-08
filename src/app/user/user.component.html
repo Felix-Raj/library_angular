@@ -1,8 +1,14 @@
-<!-- User shell -->
-Users!!
-<nav>
-	<a routerLink='/user'>List</a>
-	<a routerLink='/user/new'>New</a>
+<nav class="navbar navbar-expand navbar-light flex-column flex-md-row bd-navbar">
+	<div class="navbar-nav-scroll">
+		<ul class="navbar-nav bd-navbar-nav flex-row">
+			<li class="nav-item">
+				<a class="nav-link" routerLink='/user'>List</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" routerLink='/user/new'>New</a>
+			</li>
+		</ul>
+	</div>
 </nav>
 <main>
 	<router-outlet></router-outlet>

@@ -1,7 +1,7 @@
 {{message}}
 <form [formGroup]="lentForm" (ngSubmit)="onSubmit()">
-	<label>User: <input formControlName="lib_user" title="Enter User Id"></label>
-	<label>Book: <input formControlName="book" title="Enter Book Id"></label>
+	<label>User: <input formControlName="lib_user" title="Enter User Id" #user_select></label>
+	<label>Book: <input formControlName="book" title="Enter Book Id" #book_select></label>
 	<label>Duration: <input formControlName="duration" ></label>
 	<label>Lent On: <input formControlName="lent_on" ></label>
 	<label hidden="">Due On: <input formControlName="due_on"></label>
@@ -18,7 +18,7 @@
 		</thead>
 		<tbody>
 			<tr *ngFor="let user of lentUser">
-				<td>{{user.uid}}</td>
+				<td (click)="user_select.value=user.uid"><a>{{user.uid}}</a></td>
 				<td>{{user.name}}</td>
 			</tr>
 		</tbody>
@@ -48,7 +48,7 @@
 		</thead>
 		<tbody>
 			<tr *ngFor="let book of lentBook">
-				<td>{{book.book_id}}</td>
+				<td (click)="book_select.value=book.book_id"><a>{{book.book_id}}</a></td>
 				<td>{{book.title}}</td>
 				<td>{{book.author}}</td>
 				<td style="max-width: 20em">
