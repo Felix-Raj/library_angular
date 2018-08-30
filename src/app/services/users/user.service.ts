@@ -27,8 +27,16 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(url = urls.userList): Observable<Result<User>>{
-  	return this.http.get<Result<User>>(url);
+  getUsers(url = urls.userList, search?: {}, ordering?: string): Observable<Result<User>>{
+    var httpParams = new HttpParams();
+    var queries = {};
+    if (search){
+      if (search['search'] != '') {
+        httpParams = httpParams.set('search', search['search'])
+      }
+    }
+    queries = {params: httpParams}
+  	return this.http.get<Result<User>>(url, queries);
   }
 
   getUser(search_userId: string){

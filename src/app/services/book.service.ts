@@ -24,7 +24,7 @@ export class BookService {
 
   constructor(private http: HttpClient) { }
 
-  getBooks(url = urls.bookList, search?:{}): Observable<Result<Book>>{
+  getBooks(url = urls.bookList, search?:{}, ordering?: string): Observable<Result<Book>>{
     var httpParams: HttpParams = new HttpParams();
     var queries= {};
     if (search){
@@ -43,6 +43,12 @@ export class BookService {
       if (search['category'] != '') {
         httpParams = httpParams.set('category', search['category']);
       }
+      if(search['search'] != ''){
+        httpParams = httpParams.set('search', search['search']);
+      }
+    }
+    if (ordering) {
+      httpParams = httpParams.set('ordering', search['ordering'])
     }
     queries={params: httpParams};
   	return this.http.get<Result<Book>>(url, queries);

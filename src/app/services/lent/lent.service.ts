@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Lent, Result } from '../../class/classes';
@@ -20,7 +20,15 @@ export class LentService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getLentList(url = urls.lentList): Observable<Result<Lent>> {
+  getLentList(url = urls.lentList, search?:{}, ordering?:string): Observable<Result<Lent>> {
+    var httpParams = new HttpParams();
+    var queries = {};
+    if (search){
+      if (search['search'] != '') {
+        httpParams = httpParams.set('search', search['search'])
+      }
+    }
+    queries = {params: httpParams}
   	return this.httpClient.get<Result<Lent>>(url);
   }
 
