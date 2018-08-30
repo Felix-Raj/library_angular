@@ -13,6 +13,7 @@ import { BookModule } from './book/book.module';
 import { LentModule } from './lent/lent.module';
 import { UserRecentBirthdayListComponent } from './user-recent-birthday-list/user-recent-birthday-list.component';
 import { LentRecentDuesComponent } from './lent-recent-dues/lent-recent-dues.component';
+import { NotesComponent } from './notes/notes.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { LentRecentDuesComponent } from './lent-recent-dues/lent-recent-dues.com
     DashboardComponent,
     UserRecentBirthdayListComponent,
     LentRecentDuesComponent,
+    NotesComponent,
   ],
   imports: [
     BrowserModule,

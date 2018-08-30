@@ -48,3 +48,8 @@ export class Lent {
 
 	static default_lent_period = 14;
 }
+
+export class Note{
+	id: string;
+	note: string;
+}
