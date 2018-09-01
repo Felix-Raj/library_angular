@@ -45,15 +45,16 @@ export class NotesComponent extends  ResultList<Note> implements OnInit {
   	)
   }
 
+  delete(id: string){
+  	this.notesService.deleteNote(id).subscribe(()=>{}, ()=>{ this.message = 'Unable to delete'; console.log(this.message);})
+  	this.list = this.list.filter((note)=>{return note.id!=id}, this.list)
+  }
+
   onEnter(value: string) {
   	var newNote = new Note();
   	newNote.id = '-1';
   	newNote.note = value;
   	this.addNote(newNote);
-  	this.notesService.addNote(newNote).subscribe(
-  		(note:Note)=>{this.list.unshift(newNote)},
-  		(error)=>{console.log(error); this.list.unshift(newNote)}
-  	);
   }
 
   getRandomIndex(){

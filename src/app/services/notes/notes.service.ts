@@ -1,41 +1,34 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http'
 
 import { Observable, of } from 'rxjs';
+
 
 import { Note, Result } from '../../class/classes';
 import { httpOptions, baseUrl } from '../book.service';
 
-const mockResult = {
-	count: 11,
-	next: null, previous: null,
-	results:[
-		{id:"0", note:"Note one"},
-		{id:"1", note:"Note two"},
-		{id:"2", note:"Note three"},
-		{id:"3", note:"Note three Note three"},
-		{id:"4", note:"Note three Note threeNote three"},
-		{id:"5", note:"Note threeNote threeNote threeNote threeNote threeNote threeNote three"},
-		{id:"6", note:"Note threeNote three"},
-		{id:"7", note:"Note"},
-		{id:"8", note:"Note threeNote threeNote threeNote three"},
-		{id:"9", note:"Note three Note three"},
-		{id:"10", note:"Note three Note threeNote threeNote threeNote"},
-		{id:"11", note:"Note threeNote threeNote threeNote threeNote threeNote threeNote threeNote threeNote three"},
-	]
-};
-
+const noteBaseUrl = baseUrl+'/note/';
+const urls= {
+	list : noteBaseUrl+'',
+	new: noteBaseUrl+'new/',
+	delete: noteBaseUrl+'<id>/delete/'
+}
 @Injectable({
   providedIn: 'root'
 })
 export class NotesService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getNotes(url: string = ''): Observable<Result<Note>>{
-  	return of(mockResult);
+  getNotes(url: string = urls.list): Observable<Result<Note>>{
+  	return this.http.get<Result<Note>>(url);
   }
 
   addNote(note: Note): Observable<Note>{
-  	return of(note);
+  	return this.http.post<Note>(urls.new, note);
+  }
+
+  deleteNote(id: string): Observable<any>{
+  	return this.http.delete<any>(urls.delete.replace('<id>', id));
   }
 }
