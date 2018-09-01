@@ -23,6 +23,7 @@ export class NotesComponent extends  ResultList<Note> implements OnInit {
   }
 
   ngOnInit() {
+  	this.loadAll = true;
   	this.getList();
   }
 
