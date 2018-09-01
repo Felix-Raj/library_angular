@@ -34,4 +34,8 @@ export class NotesService {
   getNotes(url: string = ''): Observable<Result<Note>>{
   	return of(mockResult);
   }
+
+  addNote(note: Note): Observable<Note>{
+  	return of(note);
+  }
 }

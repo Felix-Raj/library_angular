@@ -1,7 +1,15 @@
 <div class="row">
 	<div class="col">
 		<div class="card-columns" *ngIf="result!=null">
-			<div class="card" *ngFor="let note of list">
+			<div class="card border-success mb-3">
+				<div class="card-body">
+					<h5 class="card-title"></h5>
+					<p class="card-text">
+						<input type="text" name="" class="form-control border-0" placeholder="New Note" #box (keyup.enter)="onEnter(box.value); box.value=''">
+					</p>
+				</div>
+			</div>
+			<div class="ls-{{note.id}}" [ngClass]="cardStyle(note.id)" *ngFor="let note of list">
 				<!-- <img class="card-img-top" [src]="_image_src(book.preview)" alt="Card image cap"> -->
 				<div class="card-body">
 					<h5 class="card-title">
@@ -13,11 +21,10 @@
 		</div>
 	</div> <!-- col fin -->
 </div> <!-- row fin -->
-
-<div style="position: -webkit-sticky; position: sticky; bottom: 0; padding: 50px; font-size: 20px;">
-	<svg width="80" height="80" (click)="addNote()">
-		<circle cx="40" cy="40" r="40" stroke="blue" stroke-width="2" fill="transparent" />
-		<polygon points="30,10,50,10,50,30, 70,30,70,50,50, 50, 50,70, 30,70, 30,50, 10,50, 10,30, 30,30"
-  style="fill:blue;stroke:transparent;stroke-width:0;fill-rule:evenodd;" />
-	</svg>
-</div>
+		<!-- <div style="position: -webkit-sticky; position: sticky; bottom: 0; padding: 50px; font-size: 20px;">
+					<svg width="80" height="80" (click)="addNote()">
+								<circle cx="40" cy="40" r="40" stroke="blue" stroke-width="2" fill="transparent" />
+								<polygon points="30,10,50,10,50,30, 70,30,70,50,50, 50, 50,70, 30,70, 30,50, 10,50, 10,30, 30,30"
+								style="fill:blue;stroke:transparent;stroke-width:0;fill-rule:evenodd;" />
+							</svg>
+			</div> -->
