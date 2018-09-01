@@ -16,6 +16,7 @@ export class NotesComponent extends  ResultList<Note> implements OnInit {
 	newNote: string;
 	borderTypes=['primary', 'secondary', 'success', 'danger', 'warning', 'info']
 	lastIndex = 0;
+	message='';
 
   constructor(private notesService: NotesService) { 
   	super();
@@ -29,15 +30,25 @@ export class NotesComponent extends  ResultList<Note> implements OnInit {
     return this.notesService.getNotes(url);
   }
 
-  addNote(){
-  	console.log('add note');
-  	this.list.push(new Note());
+  addNote(note:Note, retries=0){
+  	this.notesService.addNote(note).subscribe(
+  		(note: Note)=>{this.list.unshift(note)},
+  		(err)=>{
+  			console.log('Could not save note '+note.note+' due to '+err+' retying '+retries+' time');
+  			if (retries >= 10) {
+  				this.message = 'Could not save note '+note.note+' due to '+err;
+  				return ;
+  			}
+  			this.addNote(note, retries+1);
+  		}
+  	)
   }
 
   onEnter(value: string) {
   	var newNote = new Note();
   	newNote.id = '-1';
   	newNote.note = value;
+  	this.addNote(newNote);
   	this.notesService.addNote(newNote).subscribe(
   		(note:Note)=>{this.list.unshift(newNote)},
   		(error)=>{console.log(error); this.list.unshift(newNote)}
