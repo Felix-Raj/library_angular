@@ -26,4 +26,9 @@ export class NotesComponent extends  ResultList<Note> implements OnInit {
     return this.notesService.getNotes(url);
   }
 
+  addNote(){
+  	console.log('add note');
+  	this.list.push(new Note());
+  }
+
 }
