@@ -20,6 +20,7 @@ export class Book {
 	title: string;
 	author: string;
 	copies: number;
+	price: number;
 	booktag_set: Array<Tag>;
 	book_id: string;
 	locked?: boolean;

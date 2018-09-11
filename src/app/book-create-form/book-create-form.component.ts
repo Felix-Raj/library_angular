@@ -34,6 +34,7 @@ export class BookCreateFormComponent implements OnInit, OnChanges {
   	this.bookCreateForm = this.formBuilder.group({
   		title: ['', Validators.required],
   		author: ['', Validators.required],
+      price: 0,
   		copies: '',
       book_id:['', Validators.required],
       locked: false,
@@ -48,6 +49,7 @@ export class BookCreateFormComponent implements OnInit, OnChanges {
   		title: this.bookCreateForm.value.title as string,
   		author: this.bookCreateForm.value.author as string,
   		copies: this.bookCreateForm.value.copies as number,
+      price: this.bookCreateForm.value.price as number,
   		booktag_set: [],
       book_id: this.bookCreateForm.value.book_id as string,
       locked: this.bookCreateForm.value.locked as boolean,
