@@ -15,6 +15,7 @@ export class LentRecentDuesComponent implements OnInit {
 	recentDues: Array<Lent>;
 	loading = true;
 	message='';
+  today = new Date();
 
   constructor(private lentService: LentService) {}
 
@@ -53,6 +54,15 @@ export class LentRecentDuesComponent implements OnInit {
       ()=>{this.message=''},
       3000
     );
+  }
+
+  rowStyle(due_on){
+    const dueDate = new Date(due_on);
+    if (dueDate < this.today){
+      return "text-danger";
+    }else{
+      return "text-success";
+    }
   }
 
 }

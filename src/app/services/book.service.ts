@@ -55,7 +55,7 @@ export class BookService {
   }
 
   getBook(search_bookId): Observable<Result<Book>>{
-    const queries=search_bookId?{params: new HttpParams().set('book_id', search_bookId)}: {}
+    const queries=search_bookId?{params: new HttpParams().set('search', search_bookId)}: {}
     return this.http.get<Result<Book>>(urls.bookList, queries);
   }
 

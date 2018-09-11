@@ -12,13 +12,13 @@
 			</tr>
 		</thead>
 		<tbody *ngIf="recentDues">
-			<tr *ngFor="let lent of recentDues">
+			<tr *ngFor="let lent of recentDues" class="{{rowStyle(lent.due_on)}}">
 				<td>{{lent.lib_user.name}}</td>
 				<td>{{lent.lib_user.uid}}</td>
 				<td>{{lent.book.title}}</td>
 				<td>{{lent.lent_on}}</td>
 				<td>{{lent.due_on}}</td>
-				<button *ngIf="lent.id" class="btn btn-primary" (click)="returnLent(lent.id)">Return</button>
+				<td><button *ngIf="lent.id" class="btn btn-primary" (click)="returnLent(lent.id)">Return</button></td>
 			</tr>
 		</tbody>
 	</table>
