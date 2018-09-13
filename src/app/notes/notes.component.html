@@ -1,3 +1,4 @@
+<div class="alert" *ngIf="message">{{message}}</div>
 <div class="row">
 	<div class="col">
 		<div class="card-columns">
@@ -5,8 +6,9 @@
 				<div class="card-body">
 					<h5 class="card-title"></h5>
 					<p class="card-text">
-						<input type="text" name="" class="form-control border-0" placeholder="New Note" #box (keyup.enter)="onEnter(box.value); box.value=''">
+						<input type="text" name="" class="form-control border-0" placeholder="New Note" #box>
 					</p>
+					<button class="btn btn-primary" (click)="onEnter(box.value); box.value=''">Add</button>
 				</div>
 			</div>
 			<div class="ls-{{note.id}}" [ngClass]="cardStyle(note.id)" *ngFor="let note of list">
@@ -15,7 +17,14 @@
 					<h5 class="card-title">
 						<!-- x -->
 					</h5>
-					<p class="card-text">{{note.note}} <em style="float: right;" class="text-danger" (click)="delete(note.id)">X</em></p>
+					<p class="card-text">
+						<textarea type="text" name="" class="form-control border-0" value="{{note.note}}" hidden #editBox></textarea>
+						<span (click)="editBox.hidden = false; mNote.hidden=true;" #mNote>{{note.note}}</span>
+					</p>
+					<div class="btn-group" role="group">
+						<button class="btn btn-primary" (click)="updateNote(note.id, editBox.value); editBox.hidden=true; mNote.hidden=false;">Update</button>
+						<button class="btn btn-primary" (click)="delete(note.id)">Remove</button>
+					</div>
 				</div>
 			</div>
 		</div>

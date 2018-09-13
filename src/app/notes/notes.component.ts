@@ -31,6 +31,11 @@ export class NotesComponent extends  ResultList<Note> implements OnInit {
     return this.notesService.getNotes(url);
   }
 
+  getNoteFromListById(id: string){
+  	// todo : not tested
+  	return this.list.filter((value)=>{return value.id == id;});
+  }
+
   addNote(note:Note, retries=0){
   	this.notesService.addNote(note).subscribe(
   		(note: Note)=>{this.list.unshift(note)},
@@ -41,6 +46,18 @@ export class NotesComponent extends  ResultList<Note> implements OnInit {
   				return ;
   			}
   			this.addNote(note, retries+1);
+  		}
+  	)
+  }
+
+  updateNote(noteId: string, content: string){
+  	const note = this.getNoteFromListById(noteId)[0];
+  	note.note = content;
+  	this.notesService.updateNote(note).subscribe(
+  		(note: Note) => {},
+  		(err)=>{
+  			console.log('could not update note', err);
+  			this.message = 'Could Not update Note!!'
   		}
   	)
   }
