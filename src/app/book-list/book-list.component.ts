@@ -7,6 +7,7 @@ import {
 import { BookService } from '../services/book.service';
 import { Book, Result } from '../class/classes';
 import { ResultList } from '../shared/list_class';
+import { BookCreateFormComponent } from '../book-create-form/book-create-form.component';
 
 @Component({
   selector: 'app-book-list',
@@ -18,6 +19,7 @@ export class BookListComponent extends  ResultList<Book> implements OnInit{
   searchable={
     book_id:'',title:'', author:'', booktag__tag:'', category:'',
   }
+  selectedBook: Book;
 
   constructor(private bookService: BookService) { 
     super();
@@ -50,6 +52,26 @@ export class BookListComponent extends  ResultList<Book> implements OnInit{
       category: this.searchable.category,
     };
     this.searchObject.next(obj);
+  }
+
+  select(book){
+    this.selectedBook = book;
+  }
+
+  changedBook($event){
+    console.log($event);
+    this.changeBook($event);
+  }
+
+  changeBook(book: Book){
+    this.list = this.list.map((v)=>{
+      if(v.id ==  book.id){
+        return book;
+      }else{
+        return v;
+      }
+    });
+    this.selectedBook=book;
   }
 
 }

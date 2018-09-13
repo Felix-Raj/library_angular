@@ -1,4 +1,4 @@
-{{errors.error | json }}
+<div *ngIf="errors">{{errors.error | json }}</div>
 <form [formGroup]="bookCreateForm" (ngSubmit)="onSubmit()">
 	<div class="form-group">
 		<div *ngIf="errors"><div *ngIf="errors.book_id">EE</div></div>

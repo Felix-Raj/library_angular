@@ -9,6 +9,7 @@ import { BookDetailComponent } from '../book-detail/book-detail.component';
 import { BookListComponent } from '../book-list/book-list.component';
 import { BookCreateFormComponent } from '../book-create-form/book-create-form.component';
 import { BookGalleryViewComponent } from '../book-gallery-view/book-gallery-view.component';
+import { BookEditViewComponent } from '../book-edit-view/book-edit-view.component';
 
 @NgModule({
 	imports: [
@@ -23,6 +24,7 @@ import { BookGalleryViewComponent } from '../book-gallery-view/book-gallery-view
 		BookComponent,
 		BookCreateFormComponent,
 		BookGalleryViewComponent,
+		BookEditViewComponent,
 	],
 	providers:[
 		BookService

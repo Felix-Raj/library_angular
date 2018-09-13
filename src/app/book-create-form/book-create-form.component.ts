@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 import { BookService } from '../services/book.service';
@@ -13,6 +13,7 @@ export class BookCreateFormComponent implements OnInit, OnChanges {
 
 	bookCreateForm: FormGroup;
 	@Input() book: Book;
+  @Output() outBook = new EventEmitter<Book>();
   message: string;
   errors: {error:''};
   book_categories = book_categories;
@@ -57,18 +58,45 @@ export class BookCreateFormComponent implements OnInit, OnChanges {
       preview: this.bookCreateForm.value.preview
   	};
 
-  	this.bookService.createBook(saveBook).subscribe(
-  		(data: Book) => {
-        console.log(data); this.bookCreateForm.reset()
-        this.message = "success";
-      },
-  		error=>{
-        console.log('---error----');
-        console.log(error);
-        this.message = "failed!!"
-        this.errors = error.error;
+    if(this.book){
+      console.log('edit');
+
+      if(saveBook.preview){
+        console.log('PREVIEW');
+        console.log(saveBook.preview);
+      }else{
+        console.log('NO');
+        saveBook.preview = this.book.preview
       }
-  	);
+
+      saveBook.id = this.book.id;
+
+      console.log(saveBook);
+
+      this.bookService.editBook(saveBook).subscribe(
+        (data)=>{this._onSuccess(data)}, (err)=>{this._onError(err)}
+      );
+    }else{
+      console.log('creaet');
+      this.bookService.createBook(saveBook).subscribe(
+        (data)=>{this._onSuccess(data)}, (err)=>{this._onError(err)}
+      );
+    }
+
+  }
+
+  _onSuccess(book:Book){
+    console.log(book);
+    this.bookCreateForm.reset()
+    this.message = 'success';
+    this.outBook.emit(book);
+  }
+
+  _onError(err){
+    console.log('error on creating/editing book');
+    console.log(err);
+    this.message = 'failed!';
+    this.errors = err.error;
   }
 
   onFileChange(event) {

@@ -13,6 +13,7 @@ export const baseUrl = 'http://127.0.0.1:8000'
 const urls = {
 	bookList: baseUrl+'/book/',
   createBook: baseUrl+'/book/new/',
+  editBook: baseUrl+'/book/<book_id>/edit/',
   lock: baseUrl+'/book/<book_id>/lock',
   unlock: baseUrl+'/book/<book_id>/unlock',
 }
@@ -43,7 +44,7 @@ export class BookService {
       if (search['category'] != '') {
         httpParams = httpParams.set('category', search['category']);
       }
-      if(search['search'] != ''){
+      if(search['search'] != undefined){
         httpParams = httpParams.set('search', search['search']);
       }
     }
@@ -66,6 +67,10 @@ export class BookService {
 
   createBook(book: Book): Observable<Book> {
     return this.http.post<Book>(urls.createBook, book, httpOptions);
+  }
+
+  editBook(book: Book): Observable<Book>{
+    return this.http.put<Book>(urls.editBook.replace('<book_id>', book.id.toString()), book, httpOptions);
   }
 
   lock(book_id: number): Observable<Book>{

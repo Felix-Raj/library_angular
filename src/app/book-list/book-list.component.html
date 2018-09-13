@@ -54,18 +54,14 @@
 						<th scope="col">Book ID</th>
 						<th scope="col">Title</th>
 						<th scope="col">Author</th>
-						<th scope="col">Tags</th>
 						<th scope="col">Copies</th>
 					</tr>
 				</thead>
 				<tbody *ngIf="result!=null">
 					<tr *ngFor="let book of list">
 						<td>{{book.book_id}}</td>
-						<td><a [routerLink]="[book.id]">{{book.title}}</a></td>
+						<td><span class="text-primary" (click)="select(book)">{{book.title}}</span></td>
 						<td>{{book.author}}</td>
-						<td style="max-width: 20em">
-							<small *ngFor="let tag of book.booktag_set" style="padding: 5px">{{tag.tag}}</small>,
-						</td>
 						<td>{{book.copies}}</td>
 					</tr>
 				</tbody>
@@ -75,16 +71,25 @@
 				<button *ngIf="result.next!=null" (click)="loadAllBooks()">Load All</button>
 			</div>
 		</div>
-	</div>
-	<div class="col">
-		<div style="position: sticky; top: 0;">
-			<router-outlet></router-outlet>
+		<div class="app-loading" *ngIf="loading; else data">
+			<div class="logo"></div>
+			<svg class="spinner" viewBox="25 25 50 50">
+				<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+			</svg>
 		</div>
 	</div>
-</div>
-<div class="app-loading" *ngIf="loading">
-	<div class="logo"></div>
-	<svg class="spinner" viewBox="25 25 50 50">
-		<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
-	</svg>
+	<div class="col" *ngIf="result!=null">
+		<div style="position: sticky; top: 0;">
+			<app-book-detail [book]="selectedBook"></app-book-detail>
+		</div>
+	</div>
+	<div class="col" *ngIf="result!=null">
+		<div style="position: sticky; top: 0;">
+			<div class="card">
+				<div class="card-body">
+					<app-book-create-form [book]="selectedBook" (outBook)="changedBook($event)"></app-book-create-form>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
