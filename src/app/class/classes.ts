@@ -37,6 +37,7 @@ export class User {
 	name: string;
 	date_of_birth?: string;
 	avatar?: Avatar;
+	account_activated: Boolean;
 }
 
 export class Lent {

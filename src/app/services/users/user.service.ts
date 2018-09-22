@@ -18,6 +18,8 @@ const urls = {
 	newUser: user_base_url+'new/',
   recentBirthdays: user_base_url+'birthdays/',
   pendingLents:user_base_url+'$/lent/pending/',
+  activate: user_base_url+'$/activate/',
+  deactivate: user_base_url+'$/deactivate/',
 }
 
 @Injectable({
@@ -52,6 +54,16 @@ export class UserService {
   createUser(user: User): Observable<User>{
   	console.log('creating user');
   	return this.http.post<User>(urls.newUser, user, httpOptions);
+  }
+
+  activateUserAccount(user: User): Observable<User>{
+    console.log('activating user account for user ', user.name, 'with user id ', user.id);
+    return this.http.put<User>(urls.activate.replace('$', user.id), httpOptions);
+  }
+
+  deactivateUserAccount(user: User): Observable<User>{
+    console.log('de-activating user account for user ', user.name, 'with user id ', user.id);
+    return this.http.put<User>(urls.deactivate.replace('$', user.id), httpOptions);
   }
 
   getRecentBirthdays(): Observable<Result<User>> {

@@ -11,11 +11,11 @@
 					</tr>
 				</thead>
 				<tbody *ngIf="result!=null">
-					<tr *ngFor="let user of list">
+					<tr *ngFor="let user of list" [class.table-danger]="!user.account_activated" (click)="toggleActivation(user.id)">
 						<td>{{user.uid}}</td>
 						<td>{{user.name}}</td>
 						<td>{{user.date_of_birth}}</td>
-						<td><img [src]="_image_src(user.avatar)" class="img-thumbnail rounded-circle" style="width: 75px; height: 75px;" /></td>
+						<td><img [src]="_image_src(user.avatar)" class="img-thumbnail rounded-circle" style="width: 75px; height: 75px;" *ngIf="user.avatar"/></td>
 					</tr>
 				</tbody>
 			</table>

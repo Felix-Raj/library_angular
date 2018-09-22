@@ -29,4 +29,31 @@ export class UserListComponent extends ResultList<User> implements OnInit {
     return this.sanitizer.bypassSecurityTrustUrl("data:"+avatar.filetype+";base64, "+avatar.value);
   }
 
+  toggleActivation(userId: string){
+    const user: User = this.list.filter((usr, index)=>{return usr.id == userId;})[0];
+    if (user.account_activated) {
+      this.userService.deactivateUserAccount(user).subscribe(
+        (user)=>{this.updateUser(user)},
+        (err)=>{console.log('Failed to deactivate');}
+      )
+    } else{
+      this.userService.activateUserAccount(user).subscribe(
+        (user)=>{this.updateUser(user)},
+        (err)=>{console.log('Failed to activate account');}
+      );
+    }
+  }
+
+  updateUser(user: User){
+    this.list = this.list.map(
+      (usr, index)=>{
+        if(usr.id == user.id){
+          return user;
+        }else{
+          return usr;
+        }
+      }
+    );
+  }
+
 }

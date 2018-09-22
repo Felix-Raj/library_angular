@@ -34,6 +34,7 @@ export class UserCreateFormComponent implements OnInit, OnChanges {
       name: this.userCreateForm.value.name as string,
       date_of_birth: this.userCreateForm.value.date_of_birth as string,
       avatar: this.userCreateForm.value.avatar,
+      account_activated: this.userCreateForm.value.account_activated,
     }
     this.userService.createUser(saveUser).subscribe(
       (data: User) => console.log(data), //todo: remove
@@ -47,6 +48,7 @@ export class UserCreateFormComponent implements OnInit, OnChanges {
       name: ['', Validators.required],
       date_of_birth: '',
       avatar:null,
+      account_activated: false,
     });
   }
 
