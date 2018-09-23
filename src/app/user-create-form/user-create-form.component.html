@@ -1,12 +1,58 @@
 <form [formGroup]="userCreateForm" (ngSubmit)="onSubmit()">
-	<label>UID: <input formControlName="uid"> </label>
-	<label>Name: <input formControlName="name"> </label>
-	<label>Date Of Birth<input type="date" formControlName="date_of_birth"></label>
-  <label>Account Activated<input type="checkbox" name="" formControlName="account_activated"></label>
-  <div class="form-group">
-    <label for="avatar">Avatar</label>
-    <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
-    <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">clear file</button>
+  <div class="form-row align-items-start">
+
+    <div class="col">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">UID</span>
+        </div>
+        <input type="text" class="form-control" placeholder="User ID" aria-label="User ID" aria-describedby="basic-addon1" formControlName="uid">
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Name</span>
+        </div>
+        <input type="text" class="form-control" placeholder="User Name" aria-label="User Name" aria-describedby="basic-addon1" formControlName="name">
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Date of Birth</span>
+        </div>
+        <input type="date" class="form-control" placeholder="Date of Birth" aria-label="Date of Birth" aria-describedby="basic-addon1" formControlName="date_of_birth">
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Category</span>
+        </div>
+        <select class="form-control" placeholder="Category" aria-label="Category" aria-describedby="basic-addon1" formControlName="category">
+          <option *ngFor="let cat of catergories" value="{{cat}}">{{cat | uppercase }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Account Activated</span>
+        </div>
+        <input type="checkbox" class="form-control" placeholder="Account Activated" aria-label="Account Activated" aria-describedby="basic-addon1" formControlName="account_activated">
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Avatar</span>
+        </div>
+        <input type="file" class="form-control btn btn-primary" placeholder="Avatar" aria-label="Avatar" aria-describedby="basic-addon1" id="avatar" (change)="onFileChange($event)" #fileInput>
+        <!-- <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">Clear File</button> -->
+      </div>
+    </div>
+
   </div>
 
 	<div *ngIf="name.invalid && (name.dirty || name.touched)"
@@ -16,7 +62,7 @@
   		</div>
   	</div>
 
-  	<button type="submit" [disabled]="userCreateForm.pristine">Save</button>
+  	<button type="submit" [disabled]="userCreateForm.pristine" class="btn btn-primary">Save</button>
 </form>
 
 <p>Form value : {{userCreateForm.value | json}} </p>

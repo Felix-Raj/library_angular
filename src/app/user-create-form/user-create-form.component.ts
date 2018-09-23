@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { User } from '../class/classes';
+import { User, user_categories } from '../class/classes';
 import { UserService } from '../services/users/user.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class UserCreateFormComponent implements OnInit, OnChanges {
 
 	userCreateForm: FormGroup;
 	@Input() user: User;
+  catergories = user_categories;
 
   constructor( private formBuilder: FormBuilder, 
     public userService: UserService ) {
@@ -35,6 +36,7 @@ export class UserCreateFormComponent implements OnInit, OnChanges {
       date_of_birth: this.userCreateForm.value.date_of_birth as string,
       avatar: this.userCreateForm.value.avatar,
       account_activated: this.userCreateForm.value.account_activated,
+      category: this.userCreateForm.value.category,
     }
     this.userService.createUser(saveUser).subscribe(
       (data: User) => console.log(data), //todo: remove
@@ -49,6 +51,7 @@ export class UserCreateFormComponent implements OnInit, OnChanges {
       date_of_birth: '',
       avatar:null,
       account_activated: false,
+      category: this.catergories[0].toUpperCase(),
     });
   }
 

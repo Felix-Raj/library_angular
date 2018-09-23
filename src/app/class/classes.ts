@@ -38,7 +38,9 @@ export class User {
 	date_of_birth?: string;
 	avatar?: Avatar;
 	account_activated: Boolean;
+	category: string;
 }
+export const user_categories = ['student', 'teacher', 'default'];
 
 export class Lent {
 	id?: string;
