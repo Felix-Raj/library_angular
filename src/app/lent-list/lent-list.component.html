@@ -22,7 +22,7 @@
 						<td>{{lent.lib_user.uid}}</td>
 						<td>{{lent.book.title}}</td>
 						<td>{{lent.lent_on}}</td>
-						<td>{{lent.due_on}}</td>
+						<td (click)="renew(lent.id)" title="Click to renew for a period of 7 days">{{lent.due_on}}</td>
 						<td class="justify-content">
 							<button *ngIf="lent.id" class="btn btn-primary" (click)="returnLent(lent.id)">Return</button>
 						</td>

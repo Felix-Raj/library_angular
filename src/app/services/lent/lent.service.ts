@@ -10,7 +10,8 @@ const urls = {
 	lentList: lentUrl,
   createLent: lentUrl+'new/',
 	returnLent: lentUrl+'return/<lent_id>/',
-  recentDues: lentUrl+'recent_dues/'
+  recentDues: lentUrl+'recent_dues/',
+  renew: lentUrl+'renew/<lent_id>/',
 }
 
 @Injectable({
@@ -49,5 +50,9 @@ export class LentService {
 
   recentDues(): Observable<Array<Lent>>{
     return this.httpClient.get<Array<Lent>>(urls.recentDues, httpOptions);
+  }
+
+  renew(lentId: string): Observable<Lent>{
+    return this.httpClient.put<Lent>(urls.renew.replace('<lent_id>',lentId), httpOptions);
   }
 }

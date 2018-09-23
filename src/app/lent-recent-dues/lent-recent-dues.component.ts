@@ -49,6 +49,29 @@ export class LentRecentDuesComponent implements OnInit {
     this.removemessage();
   }
 
+  renew(lentId: string){
+    console.log('Renew Lent with id ', lentId);
+    this.lentService.renew(lentId).subscribe(
+      (lent: Lent)=>{
+        this.message = 'Successfully Renewed';
+        this.recentDues = this.recentDues.map(
+          (lnt: Lent)=>{
+            if(lnt.id == lentId){
+              lnt.due_on = lent.due_on;
+              return lnt;
+            }else{
+              return lnt;
+            }
+          }
+        );
+      },
+      (error)=>{
+        console.log('Error renewing lent with lent id ',lentId,'. Reason ',error);
+      }
+    );
+    this.removemessage();
+  }
+
   removemessage(){
     setTimeout(
       ()=>{this.message=''},
