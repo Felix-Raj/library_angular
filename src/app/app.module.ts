@@ -14,6 +14,8 @@ import { LentModule } from './lent/lent.module';
 import { UserRecentBirthdayListComponent } from './user-recent-birthday-list/user-recent-birthday-list.component';
 import { LentRecentDuesComponent } from './lent-recent-dues/lent-recent-dues.component';
 import { NotesComponent } from './notes/notes.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { NotesComponent } from './notes/notes.component';
     UserModule,
     BookModule,
     LentModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent]
