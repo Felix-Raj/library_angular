@@ -27,6 +27,9 @@ export class BookGalleryViewComponent extends  ResultList<Book> implements OnIni
   }
 
   _image_src(avatar: Avatar){
+    if (!avatar || avatar.filetype == undefined) {
+      return "#";
+    }
     return this.sanitizer.bypassSecurityTrustUrl("data:"+avatar.filetype+";base64, "+avatar.value);
   }
 

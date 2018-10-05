@@ -77,7 +77,8 @@ export class BookCreateFormComponent implements OnInit, OnChanges {
         (data)=>{this._onSuccess(data)}, (err)=>{this._onError(err)}
       );
     }else{
-      console.log('creaet');
+      console.log('create');
+      saveBook.locked = saveBook.locked? true:false;
       this.bookService.createBook(saveBook).subscribe(
         (data)=>{this._onSuccess(data)}, (err)=>{this._onError(err)}
       );
