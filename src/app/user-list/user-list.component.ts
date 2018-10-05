@@ -36,12 +36,18 @@ export class UserListComponent extends ResultList<User> implements OnInit {
     const user: User = this.list.filter((usr, index)=>{return usr.id == userId;})[0];
     if (user.account_activated) {
       this.userService.deactivateUserAccount(user).subscribe(
-        (user)=>{this.updateUser(user)},
+        (result)=>{
+          user.account_activated = result.account_activated;
+          this.updateUser(user)
+        },
         (err)=>{console.log('Failed to deactivate'); console.log(err);}
       )
     } else{
       this.userService.activateUserAccount(user).subscribe(
-        (user)=>{this.updateUser(user)},
+        (result)=>{
+          user.account_activated = result.account_activated;
+          this.updateUser(user)
+        },
         (err)=>{console.log('Failed to activate account'); console.log(err);}
       );
     }
