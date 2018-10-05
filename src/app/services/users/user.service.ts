@@ -20,7 +20,9 @@ const urls = {
   pendingLents:user_base_url+'$/lent/pending/',
   activate: user_base_url+'$/activate/',
   deactivate: user_base_url+'$/deactivate/',
+  export: user_base_url+'export/',
 }
+
 
 @Injectable({
   providedIn: 'root'
@@ -83,5 +85,9 @@ export class UserService {
   	}
 
   	return throwError('Error!');
+  }
+
+  static getExportURL() {
+    return urls.export;
   }
 }

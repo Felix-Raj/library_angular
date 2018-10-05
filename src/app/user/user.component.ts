@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../services/users/user.service';
+
+
 
 
 @Component({
@@ -6,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent {}
+export class UserComponent {
+	exportUrl = UserService.getExportURL();
+}
 /*
 * root of user center
 * shell for user
