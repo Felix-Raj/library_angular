@@ -26,6 +26,9 @@ export class UserListComponent extends ResultList<User> implements OnInit {
   }
 
   _image_src(avatar: Avatar){
+    if (avatar.filetype == undefined) {
+      return "#";
+    }
     return this.sanitizer.bypassSecurityTrustUrl("data:"+avatar.filetype+";base64, "+avatar.value);
   }
 
@@ -34,12 +37,12 @@ export class UserListComponent extends ResultList<User> implements OnInit {
     if (user.account_activated) {
       this.userService.deactivateUserAccount(user).subscribe(
         (user)=>{this.updateUser(user)},
-        (err)=>{console.log('Failed to deactivate');}
+        (err)=>{console.log('Failed to deactivate'); console.log(err);}
       )
     } else{
       this.userService.activateUserAccount(user).subscribe(
         (user)=>{this.updateUser(user)},
-        (err)=>{console.log('Failed to activate account');}
+        (err)=>{console.log('Failed to activate account'); console.log(err);}
       );
     }
   }
@@ -54,6 +57,14 @@ export class UserListComponent extends ResultList<User> implements OnInit {
         }
       }
     );
+  }
+
+  getTitleForToggleActivation(status: Boolean): String{
+    if (status) {
+      return "Click to deactivate account";
+    }else{
+      return "Click to activate account";
+    }
   }
 
 }

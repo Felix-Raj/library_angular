@@ -16,7 +16,7 @@ const urls = {
   editBook: baseUrl+'/book/<book_id>/edit/',
   lock: baseUrl+'/book/<book_id>/lock',
   unlock: baseUrl+'/book/<book_id>/unlock',
-  export: baseUrl+'/export/',
+  export: baseUrl+'/book/export/',
 }
 
 @Injectable({
