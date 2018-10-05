@@ -8,14 +8,15 @@ export const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-export const baseUrl = 'http://127.0.0.1:8000'
-// export const baseUrl = 'https://boiling-scrubland-41951.herokuapp.com';
+// export const baseUrl = 'http://127.0.0.1:8000'
+export const baseUrl = 'https://boiling-scrubland-41951.herokuapp.com';
 const urls = {
 	bookList: baseUrl+'/book/',
   createBook: baseUrl+'/book/new/',
   editBook: baseUrl+'/book/<book_id>/edit/',
   lock: baseUrl+'/book/<book_id>/lock',
   unlock: baseUrl+'/book/<book_id>/unlock',
+  export: baseUrl+'/export/',
 }
 
 @Injectable({
@@ -79,5 +80,9 @@ export class BookService {
 
   unlock(book_id: number): Observable<Book>{
     return this.http.get<Book>(urls.unlock.replace('<book_id>', ''+book_id), httpOptions);
+  }
+
+  static getExportUrl() {
+    return urls.export;
   }
 }
