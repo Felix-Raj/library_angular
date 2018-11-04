@@ -3,6 +3,8 @@ import { RouterModule, Routes} from '@angular/router';
 import { DummyComponent } from './dummy/dummy.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NotesComponent } from './notes/notes.component';
+import { SearchAppComponent } from './search-app/search-app.component';
+
 
 
 
@@ -10,7 +12,8 @@ import { NotesComponent } from './notes/notes.component';
 const routes: Routes=[
 	{ path: '', component: DashboardComponent },
 	{ path: 'notes', component: NotesComponent },
-	{ path:'dummy', component: DummyComponent }
+  { path: 'search', component: SearchAppComponent },
+	{ path: 'dummy', component: DummyComponent }
 ]
 
 @NgModule({

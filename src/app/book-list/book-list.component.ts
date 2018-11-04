@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import {
    debounceTime, distinctUntilChanged, switchMap
@@ -15,6 +15,8 @@ import { BookCreateFormComponent } from '../book-create-form/book-create-form.co
   styleUrls: ['./book-list.component.css']
 })
 export class BookListComponent extends  ResultList<Book> implements OnInit{
+
+  @Input() searchWord: string;
 
   searchable={
     book_id:'',title:'', author:'', booktag__tag:'', category:'',
@@ -51,6 +53,9 @@ export class BookListComponent extends  ResultList<Book> implements OnInit{
       booktag__tag: this.searchable.booktag__tag,
       category: this.searchable.category,
     };
+    if (name == 'search') {
+      obj['search'] = value
+    }
     this.searchObject.next(obj);
   }
 
@@ -72,6 +77,10 @@ export class BookListComponent extends  ResultList<Book> implements OnInit{
       }
     });
     this.selectedBook=book;
+  }
+
+  ngOnChanges(){
+    this.search_book('search', this.searchWord);
   }
 
 }

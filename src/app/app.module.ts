@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -16,6 +17,8 @@ import { LentRecentDuesComponent } from './lent-recent-dues/lent-recent-dues.com
 import { NotesComponent } from './notes/notes.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { SearchAppComponent } from './search-app/search-app.component';
+import { BookSearchComponent } from './book-search/book-search.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,8 @@ import { environment } from '../environments/environment';
     UserRecentBirthdayListComponent,
     LentRecentDuesComponent,
     NotesComponent,
+    SearchAppComponent,
+    BookSearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +39,7 @@ import { environment } from '../environments/environment';
     UserModule,
     BookModule,
     LentModule,
+    FormsModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],

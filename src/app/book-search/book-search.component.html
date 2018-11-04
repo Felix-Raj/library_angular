@@ -1,0 +1,30 @@
+<div class="row">
+	<div class="col">
+		<div class="table-responsive">
+			<table class="table table-stripped table-bordered table-hover table-sm" *ngIf="result!=null; else loading">
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">Book ID</th>
+						<th scope="col">Title</th>
+						<th scope="col">Author</th>
+						<th scope="col">Copies</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let book of list">
+						<td>{{book.book_id}}</td>
+						<td><span class="text-primary" (click)="select(book)">{{book.title}}</span></td>
+						<td>{{book.author}}</td>
+						<td>{{book.copies}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<ng-template #loading>
+			<div *ngIf="searchWord != null; else pleaseType">
+				Reults are on the way...
+			</div>
+			<ng-template #pleaseType>Please Type in something :-)</ng-template>
+		</ng-template>
+	</div>
+</div>

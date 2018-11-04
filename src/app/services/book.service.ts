@@ -8,8 +8,8 @@ export const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-export const baseUrl = 'http://127.0.0.1:8000'
-//export const baseUrl = 'https://boiling-scrubland-41951.herokuapp.com';
+// export const baseUrl = 'http://127.0.0.1:8000'
+export const baseUrl = 'https://boiling-scrubland-41951.herokuapp.com';
 const urls = {
 	bookList: baseUrl+'/book/',
   createBook: baseUrl+'/book/new/',
@@ -30,22 +30,22 @@ export class BookService {
     var httpParams: HttpParams = new HttpParams();
     var queries= {};
     if (search){
-      if (search['book_id'] != ''){
+      if (search['book_id']){
         httpParams = httpParams.set('book_id', search['book_id']);
       }
-      if (search['title'] != '') {
+      if (search['title']) {
         httpParams = httpParams.set('title', search['title']);
       }
-      if (search['author'] != '') {
+      if (search['author']) {
         httpParams = httpParams.set('author', search['author']);
       }
-      if (search['booktag__tag'] != '') {
+      if (search['booktag__tag']) {
         httpParams = httpParams.set('booktag__tag', search['booktag__tag']);
       }
-      if (search['category'] != '') {
+      if (search['category']) {
         httpParams = httpParams.set('category', search['category']);
       }
-      if(search['search'] != undefined){
+      if(search['search']){
         httpParams = httpParams.set('search', search['search']);
       }
     }

@@ -91,6 +91,7 @@ export abstract class ResultList<T> {
       		distinctUntilChanged(),
       		switchMap((value, index)=>{
       			this.list = null;
+      			this.result = null;
       			return this._makeServiceCall(undefined, value);
       		})
 		).subscribe((data)=>{this.success_function(data);}, (error)=>{this.error_function(error)});
