@@ -1,0 +1,33 @@
+<div class="row">
+	<div class="col">
+		<div class="table-responsive">
+			<table class="table table-stripped table-bordered table-hover table-sm" *ngIf="result!=null && result.count!=0; else loading">
+				<thead class="thead-light">
+					<tr>
+						<th>UID</th>
+						<th>Name</th>
+						<th>DOB</th>
+						<th>Avatar</th>
+					</tr>
+				</thead>
+				<tbody *ngIf="result!=null">
+					<tr *ngFor="let user of list" [class.text-danger]="!user.account_activated">
+						<td (click)="toggleActivation(user.id)" title="{{getTitleForToggleActivation(user.account_activated)}}">{{user.uid}}</td>
+						<td>{{user.name}}</td>
+						<td>{{user.date_of_birth}}</td>
+						<td><img [src]="_image_src(user.avatar)" class="img-thumbnail rounded-circle" style="width: 75px; height: 75px;" *ngIf="user.avatar"/></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<ng-template #loading>
+			<div *ngIf="searchWord != null; else pleaseType">
+				<div *ngIf="result!=null && result.count==0; else onTheWay">No users found!</div>
+				<ng-template #onTheWay>
+					Results are on the way...
+				</ng-template>
+			</div>
+			<ng-template #pleaseType>Please Type in something :-)</ng-template>
+		</ng-template>
+	</div>
+</div>

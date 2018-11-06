@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col">
 		<div class="table-responsive">
-			<table class="table table-stripped table-bordered table-hover table-sm" *ngIf="result!=null; else loading">
+			<table class="table table-stripped table-bordered table-hover table-sm" *ngIf="result!=null && result.count!=0; else loading">
 				<thead class="thead-light">
 					<tr>
 						<th scope="col">Book ID</th>
@@ -22,7 +22,10 @@
 		</div>
 		<ng-template #loading>
 			<div *ngIf="searchWord != null; else pleaseType">
-				Reults are on the way...
+				<div *ngIf="result!=null && result.count==0; else onTheWay">No books found!</div>
+				<ng-template #onTheWay>
+					Results are on the way...
+				</ng-template>
 			</div>
 			<ng-template #pleaseType>Please Type in something :-)</ng-template>
 		</ng-template>

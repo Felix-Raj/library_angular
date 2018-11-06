@@ -19,6 +19,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { SearchAppComponent } from './search-app/search-app.component';
 import { BookSearchComponent } from './book-search/book-search.component';
+import { UserSearchComponent } from './user-search/user-search.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { BookSearchComponent } from './book-search/book-search.component';
     NotesComponent,
     SearchAppComponent,
     BookSearchComponent,
+    UserSearchComponent,
   ],
   imports: [
     BrowserModule,

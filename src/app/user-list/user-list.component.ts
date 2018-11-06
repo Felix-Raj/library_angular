@@ -22,7 +22,7 @@ export class UserListComponent extends ResultList<User> implements OnInit {
   }
 
   _makeServiceCall(url?, queries?){
-    return this.userService.getUsers(url);
+    return this.userService.getUsers(url, queries);
   }
 
   _image_src(avatar: Avatar){

@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 
 import { BookService } from '../services/book.service';
 import { Book, Result } from '../class/classes';
@@ -16,8 +14,9 @@ export class BookSearchComponent extends ResultList<Book> implements OnInit {
 
 	@Input() searchWord: string;
 
-  constructor(private bookService: BookService, private route: ActivatedRoute) {
+  constructor(private bookService: BookService) {
   	super();
+  	this.loadAll = true;
   }
 
   ngOnInit() {
